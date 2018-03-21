@@ -1,9 +1,10 @@
 {
-    "/auth.js": "/auth.js",
-    "/.js": "/.js",
-    "/js/app.js": "/js/app.js",
-    "/js/bootstrap.js": "/js/bootstrap.js",
-    "/css/app.css": "/css/app.css",
-    "/css/main.css": "/css/main.css",
-    "/js/secure.js": "/js/secure.js"
+    "/js/public.js": "/js/public.js?id=26ee4822c4591f9f606b",
+    "/js/auth.js": "/js/auth.js?id=94b4f8d588deaf1c24b9",
+    "/js/user.js": "/js/user.js?id=a01b269ea0ec75126113",
+    "/js/app.js": "/js/app.js?id=1717be83deaf6252319c",
+    "/js/bootstrap.js": "/js/bootstrap.js?id=ca93eadde81ed5dada2d",
+    "/css/app.css": "/css/app.css?id=d41d8cd98f00b204e980",
+    "/css/main.css": "/css/main.css?id=c1e367229fd461e45314",
+    "/js/secure.js": "/js/secure.js?id=1c24d5d92d6e78159eea"
 }
