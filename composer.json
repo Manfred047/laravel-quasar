@@ -1,7 +1,21 @@
 {
     "name": "laravel-quasar",
     "description": "Laravel with Quasar Framework for Web SPA.",
-    "keywords": ["laravel", "quasar", "spa"],
+    "keywords": [
+        "laravel",
+        "php",
+        "vuejs",
+        "vue",
+        "quasar",
+        "js",
+        "phone",
+        "tablet",
+        "desktop",
+        "spa",
+        "pwa",
+        "website",
+        "electron"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {

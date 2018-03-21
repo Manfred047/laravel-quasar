@@ -1,5 +1,36 @@
 {
-    "private": true,
+    "name": "laravel-quasar",
+    "version": "1.0.0",
+    "description": "Laravel with Quasar Framework (SPA) by Manfred047.",
+    "keywords": [
+        "laravel",
+        "php",
+        "vuejs",
+        "vue",
+        "quasar",
+        "js",
+        "phone",
+        "tablet",
+        "desktop",
+        "spa",
+        "pwa",
+        "website",
+        "electron"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Manfred047/laravel-quasar.git"
+    },
+    "author": {
+        "name": "Emanuel Chable Concepcion",
+        "email": "manfred@manfred047.com",
+        "url": "https://manfred047.com/"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Manfred047/laravel-quasar/issues"
+    },
+    "homepage": "http://quasar-framework.org",
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
