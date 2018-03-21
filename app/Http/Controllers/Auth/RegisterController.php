@@ -40,7 +40,7 @@ class RegisterController extends Controller
     {
         try{
             $client = new Client([
-                'base_uri' => 'http://127.0.0.1:8000/api/v1/',//env('API_URL'),
+                'base_uri' => env('API_URL'),
                 'cookies' => true
             ]);
             $request = $client->post('/oauth/token', [
