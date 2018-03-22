@@ -40,7 +40,7 @@ export default {
     LOGOUT(state) {
         master.self.$axios({
             method: 'post',
-            url: master.api('oauth/logout')
+            url: master.api('/oauth/logout')
         }).then((response) => {
             state.auth = false;
             state.timer.reset(300000);
