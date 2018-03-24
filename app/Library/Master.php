@@ -4,6 +4,7 @@ namespace App\Library;
 
 use App\Traits\LoginTrait;
 use App\Traits\PureTrait;
+use App\Traits\RequestTrait;
 use App\Traits\SecureTrait;
 
 /**
@@ -17,6 +18,7 @@ use App\Traits\SecureTrait;
 class Master
 {
     use PureTrait,
+        RequestTrait,
         LoginTrait,
         SecureTrait;
 

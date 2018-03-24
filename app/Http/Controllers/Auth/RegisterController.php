@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Requests\RegisterRequest;
+use App\Library\Master;
 use App\User;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Exception\ClientException;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -29,38 +28,21 @@ class RegisterController extends Controller
         $user->username = $request->username;
         $user->password = $request->password;
         $user->saveOrFail();
-        $eval = $this->autoLogin($request);
-        if ($eval) {
-            return $eval;
+        $response = $this->autoLogin($request);
+        if ($response->getStatusCode() === 200) {
+            return $response;
         }
         return response()->json(['success' => 'warning']);
     }
 
-    public function autoLogin($data)
+    public function autoLogin(Request $request)
     {
-        try{
-            $client = new Client([
-                'base_uri' => env('API_URL'),
-                'cookies' => true
-            ]);
-            $request = $client->post('/oauth/token', [
-                'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
-                'form_params' => [
-                    'username' => $data->username,
-                    'password' => $data->password,
-                    'grant_type' => 'password'
-                ],
-            ]);
-            $eval = json_decode($request->getBody()->getContents(), true);
-            if (isset($eval['success'])) {
-                return $request;
-            }
-        }catch (ClientException $ex) {
-            return $ex->getMessage();
-        }catch (BadResponseException $ex) {
-            return $ex->getMessage();
-        }
-        return false;
+        $data = [
+            'username' => $request->email,
+            'password' => $request->password,
+            'grant_type' => 'password'
+        ];
+        return Master::request(route('auth.login'), 'post', $data);
     }
 
 }
