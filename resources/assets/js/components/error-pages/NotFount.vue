@@ -1,22 +1,17 @@
 <template>
-    <q-page class="relative-position">
-        <img class="responsive" :src="$master.url('/img/e404.png')">
-        <q-btn clas="fixed-bottom"
-               icon="copyright"
-               @click="nyami"
-               label="Copyright Nyami">
-        </q-btn>
+    <q-page>
+        <div class="row col-12 vertical-middle justify-center"
+             style="top: 50%;position: absolute;transform: translate(0,-50%);">
+            <div class="row col-md-6 justify-center">
+                <img :src="$master.url('/img/e404.png')" style="width: 100%;height: auto;">
+            </div>
+        </div>
     </q-page>
 </template>
 
 <script>
     export default {
-        name: "not-fount",
-        methods: {
-            nyami() {
-                window.open('https://www.facebook.com/BestNyamiLas/', '_blank');
-            }
-        }
+        name: "not-fount"
     }
 </script>
 
