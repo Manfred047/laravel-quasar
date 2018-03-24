@@ -1,5 +1,5 @@
 <template>
-    <q-page>
+    <q-page class="bg-dark ">
         <div class="row col-12 vertical-middle justify-center"
              style="top: 50%;position: absolute;transform: translate(0,-50%);">
             <div class="row col-md-6 justify-center">
