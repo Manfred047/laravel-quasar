@@ -10,14 +10,14 @@ const User = resolve => {
     }, 'js/user');
 };
 
-const NotFount = resolve => {
-    require.ensure(['../../components/error-pages/NotFount'], () => {
-        resolve(require('../../components/error-pages/NotFount'));
+const NotFound = resolve => {
+    require.ensure(['../../components/error-pages/NotFound'], () => {
+        resolve(require('../../components/error-pages/NotFound'));
     }, 'js/auth');
 };
 
 export {
     Welcome,
     User,
-    NotFount
+    NotFound
 };

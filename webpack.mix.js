@@ -28,6 +28,12 @@ if (mix.inProduction()) {
     //mix.sourceMaps();
 }
 
+mix.webpackConfig({
+    output: {
+        publicPath: '/'
+    }
+});
+
 // Fix for "run hot"
 Mix.listen('configReady', (webpackConfig) => {
     if (Mix.isUsing('hmr')) {

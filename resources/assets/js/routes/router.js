@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import {
     Welcome,
     User,
-    NotFount
+    NotFound
 } from "./external-import/external-files";
 
 import WelcomeToolbar from '../components/layouts/WelcomeToolbar';
@@ -45,7 +45,7 @@ const router =  new VueRouter({
             path: '/error-404',
             name: 'e404',
             components: {
-                default: NotFount,
+                default: NotFound,
                 'top-menu': ErrorToolbar
             }
         },
