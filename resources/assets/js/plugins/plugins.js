@@ -1,5 +1,12 @@
 import Vue from 'vue';
 
+// Stilos de Quasar
+import "quasar-extras/material-icons";
+import "quasar-extras/fontawesome";
+import "quasar-extras/mdi";
+import "quasar-extras/ionicons";
+import "quasar-extras/roboto-font";
+import "quasar-extras/animate";
 import Quasar, * as All from 'quasar-framework/dist/quasar.mat.esm.js';
 Vue.use(Quasar, {
     components: All,
@@ -7,10 +14,6 @@ Vue.use(Quasar, {
     plugins: All,
     animations: All
 });
-// Stilos de Quasar
-//import "quasar-extras/material-icons/material-icons.css";
-import "quasar-extras/roboto-font";
-import "quasar-extras/animate";
 
 import VeeValidate, { Validator } from 'vee-validate';
 import VeeValidateLocale from 'vee-validate/dist/locale/es';
