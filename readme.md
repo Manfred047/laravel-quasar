@@ -21,7 +21,7 @@ php artisan serve
 
 y ahora puedes abrir en tu navegador: http://127.0.0.1:8000
 
-## Ingles
+## English
 
 Execute the following commands:
 1. npm install
