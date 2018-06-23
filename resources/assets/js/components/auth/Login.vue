@@ -11,8 +11,10 @@
                             v-model="form.username"
                             name="username"
                             type="text"
-                            v-validate="formRules.username"
-                            stack-label="User or Email">
+                            ref="username"
+                            v-validate="form_rules.username"
+                            :data-vv-as="$t('login.form.username')"
+                            :stack-label="$t('login.form.username')">
                     </q-input>
                 </q-field>
 
@@ -24,17 +26,22 @@
                             v-model="form.password"
                             name="password"
                             type="password"
-                            v-validate="formRules.password"
-                            stack-label="Password">
+                            ref="password"
+                            v-validate="form_rules.password"
+                            :data-vv-as="$t('login.form.password')"
+                            :stack-label="$t('login.form.password')">
                     </q-input>
                 </q-field>
+
                 <div class="row justify-center q-mt-md">
-                    <q-btn type="submit"
-                           color="primary"
-                           :disabled="errors.any()"
-                           label="Log in">
+                    <q-btn
+                            type="submit"
+                            color="primary"
+                            :disabled="errors.any()"
+                            :label="$t('login.title')">
                     </q-btn>
                 </div>
+
             </form>
         <q-inner-loading :visible="loader">
             <q-spinner-gears size="50px" color="primary"></q-spinner-gears>
@@ -47,6 +54,9 @@
     import { mapActions, mapState } from 'vuex';
     export default {
         name: 'login',
+        $_veeValidate: {
+            validator: 'new'
+        },
         computed: {
             ...mapState('auth', ['show_login']),
             show: {
@@ -58,6 +68,18 @@
                 },
                 set (value) {
                     this.showLogin(value);
+                }
+            }
+        },
+        watch: {
+            "form.username"(val) {
+                if (this.errors.firstByRule('password', 'auth')) {
+                    this.errors.remove('password');
+                }
+            },
+            "form.password"(val) {
+                if (this.errors.firstByRule('username', 'auth')) {
+                    this.errors.remove('username');
                 }
             }
         },
@@ -88,16 +110,19 @@
                     this.loader = false;
                     this.show = false;
                     this.$q.notify({
-                        message: 'Success login',
+                        message: this.$t('login.success_login'),
                         type: 'positive'
                     });
                 }).catch((errors) => {
                     this.loader = false;
-                    if (errors) {
-                        let errorList = errors.errors;
-                        for (const key of Object.keys(errorList)) {
-                            if (errorList.hasOwnProperty(key)) {
-                                this.errors.add(key, errorList[key][0], key);
+                    let list = this.$master.hasErrors(errors);
+                    if (list) {
+                        let message = this.$master.getValue(errors, ['response', 'data', 'message']);
+                        let type = message;
+                        for (const key of Object.keys(list)) {
+                            if (list.hasOwnProperty(key)) {
+                                type = ((message === 'invalid_credentials') ? 'auth' : key);
+                                this.errors.add(key, list[key][0], type);
                             }
                         }
                     }
@@ -112,7 +137,7 @@
                 setTimeout(() => {
                     this.errors.clear();
                 }, 100);
-            },
+            }
         },
         data() {
             return {
@@ -122,7 +147,7 @@
                     password: null,
                     grant_type: 'password'
                 },
-                formRules: {
+                form_rules: {
                     username: 'required|max:50',
                     password: 'required|min:8'
                 }

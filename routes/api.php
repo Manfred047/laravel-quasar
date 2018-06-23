@@ -21,11 +21,16 @@ Route::group([
         ->middleware(['client.grants:password', 'client.details'])
         ->name('auth.login');
 
+    Route::get('/oauth/check', 'Auth\LoginController@check')
+        ->middleware('client.oauth');
+
     Route::resource('/recovery', 'Auth\ForgotPasswordController')
         ->only('store');
+
     // Update password (by recovery).
     Route::resource('/new-password', 'Auth\ResetPasswordController')
         ->only('store');
+
     // New user (by register)
     Route::resource('/register', 'Auth\RegisterController')
         ->only('store');
@@ -39,8 +44,6 @@ Route::group([
 
         Route::post('/oauth/revoke', 'Auth\LoginController@revokeUserTokens')
             ->name('auth.revoke');
-
-        Route::get('/oauth/check', 'Auth\LoginController@check');
 
         Route::resource('user', 'UserController')
             ->only('index');

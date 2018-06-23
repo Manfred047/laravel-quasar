@@ -4,10 +4,11 @@
             <q-toolbar-title>
                 <span>Laravel with Quasar Framework (SPA) by Manfred047</span>
             </q-toolbar-title>
+            <lang-manager></lang-manager>
             <q-btn flat
                    dense
-                   label="See 404"
-                   @click="$router.replace({name: 'e404'})">
+                   label="Go to Welcome"
+                   @click="$router.replace({name: 'public.index'})">
             </q-btn>
             <q-btn v-if="!isAuth"
                    flat
@@ -16,10 +17,8 @@
                    @click="showLogin(true)">
             </q-btn>
             <q-btn v-else
-                   flat
-                   dense
-                   :label="userInfo.username"
-                   @click="$router.replace({name: 'user'})">
+                   flat dense
+                   :label="userInfo.username">
             </q-btn>
             <q-btn v-if="!isAuth"
                    flat
@@ -41,12 +40,14 @@
 </template>
 
 <script>
-    import Login from '../auth/Login';
-    import Register from '../auth/Register';
+    import Login from '../../auth/Login';
+    import Register from '../../auth/Register';
     import { mapActions, mapGetters} from 'vuex';
+    import LangManager from "../LangManager";
     export default {
-        name: 'welcome-toolbar',
+        name: 'user-toolbar',
         components: {
+            LangManager,
             Login,
             Register
         },

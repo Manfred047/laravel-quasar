@@ -1,13 +1,13 @@
 import Vue from 'vue';
 
-// Stilos de Quasar
+// Quasar Styles
 import "quasar-extras/material-icons";
 import "quasar-extras/fontawesome";
 import "quasar-extras/mdi";
 import "quasar-extras/ionicons";
 import "quasar-extras/roboto-font";
 import "quasar-extras/animate";
-import Quasar, * as All from 'quasar-framework/dist/quasar.mat.esm.js';
+import Quasar, * as All from 'quasar-framework/dist/quasar.mat.esm';
 Vue.use(Quasar, {
     components: All,
     directives: All,
@@ -15,10 +15,10 @@ Vue.use(Quasar, {
     animations: All
 });
 
-import VeeValidate, { Validator } from 'vee-validate';
-import VeeValidateLocale from 'vee-validate/dist/locale/es';
-Validator.localize('es', VeeValidateLocale);
-Vue.use(VeeValidate);
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate, {
+    inject: false
+});
 
 import Vuex from 'vuex';
 Vue.use(Vuex);
@@ -30,10 +30,10 @@ import vueLang from 'vue-i18n';
 Vue.use(vueLang);
 
 import { master } from './master';
-import moment from 'moment';
-import axios from 'axios';
+import moment from 'vue-moment';
+Vue.use(moment);
 
-const plugins = {
+const app = {
     install(Vue) {
         Object.defineProperty(
             Vue.prototype,
@@ -43,16 +43,10 @@ const plugins = {
             });
         Object.defineProperty(
             Vue.prototype,
-            '$moment',
-            {
-                value: moment
-            });
-        Object.defineProperty(
-            Vue.prototype,
             '$axios',
             {
-                value: axios
+                value: require('axios')
             });
     }
 };
-Vue.use(plugins);
+Vue.use(app);

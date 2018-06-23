@@ -1,6 +1,6 @@
 <template>
     <q-page>
-        <h1>Welcome user: {{ userInfo.username }}</h1>
+        <h1>{{ $t('welcome.greetings') }} {{ userInfo.username }}</h1>
     </q-page>
 </template>
 
@@ -9,7 +9,7 @@
     export default {
         name: "user",
         computed: {
-            ...mapGetters('auth', ['userInfo']),
+            ...mapGetters('auth', ['userInfo'])
         },
     }
 </script>

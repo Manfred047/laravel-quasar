@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Resources\UserResource;
 use App\Library\Master;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \Laravel\Passport\Http\Controllers\AccessTokenController;
 use Psr\Http\Message\ServerRequestInterface;
@@ -24,7 +27,7 @@ class LoginController extends AccessTokenController
         $data = json_decode($content, true);
         if(isset($data["error"])) {
             return response()->json([
-                'error' => 'invalid_credentials',
+                'message' => 'invalid_credentials',
                 'errors' => [
                     'username' => ['Incorrect username or password'],
                     'password' => ['Incorrect username or password']
@@ -41,11 +44,24 @@ class LoginController extends AccessTokenController
     /**
      * Check login (you can add more login validations)
      *
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function check()
+    public function check(Request $request)
     {
-        return response()->json(['auth' => auth()->check()]);
+        $info = [
+            'auth' => auth()->guard('api')->check(),
+            'data' => []
+        ];
+        if ($request->filled('details') && $request->details === '1') {
+            if ($info['auth']) {
+                $user = User::findOrFail(auth()->guard('api')->user()->id);
+                $info['data'] = UserResource::make($user);
+                return response()->json($info);
+            }
+            return response()->json($info);
+        }
+        return response()->json($info);
     }
 
     /**

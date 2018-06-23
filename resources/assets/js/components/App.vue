@@ -6,23 +6,18 @@
         <q-page-container>
             <router-view></router-view>
         </q-page-container>
-        <app-footer></app-footer>
+        <router-view name="app-footer"></router-view>
     </q-layout>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import AppFooter from "./layouts/AppFooter";
     export default {
-        components: {AppFooter},
         name: "app",
-        created() {
-            this.getAuthStatus();
-        },
         watch: {
             auth(value) {
                 if (value) {
-                    this.setUserInfo();
+                    this.getUserInfo();
                 }
             }
         },
@@ -30,7 +25,7 @@
             ...mapState('auth', ['auth'])
         },
         methods: {
-            ...mapActions('auth', ['getAuthStatus', 'setUserInfo'])
+            ...mapActions('auth', ['getUserInfo'])
         }
     }
 </script>

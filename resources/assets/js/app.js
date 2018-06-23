@@ -12,6 +12,11 @@ import './plugins/plugins';
 import './directives/directives';
 
 /**
+ * Vue JS Filters
+ */
+import './filters/filters';
+
+/**
  * Vue Components
  */
 import './components/components';
@@ -21,20 +26,30 @@ import './components/components';
  */
 import { router } from './routes/router';
 import { store } from './store/store';
+import { i18n } from './lang/i18n';
 
 /**
  * Master App
  */
 import App from './components/App';
 
+import { mapActions, mapGetters } from 'vuex';
+
+export const bus = new Vue();
+
 const app = new Vue({
     el: '#app',
     router,
     store,
+    i18n,
     render: h => h(App),
-    beforeCreate() {
-        this.$master.self = this;
-        this.$master._setMomentDefault();
-        this.$master._setAxiosDefault();
+    created() {
+        this.setLanguage(this.langCookie);
+    },
+    methods: {
+        ...mapActions('lang', ['setLanguage'])
+    },
+    computed: {
+        ...mapGetters('lang', ['langCookie'])
     }
 });
