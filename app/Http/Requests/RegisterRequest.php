@@ -26,7 +26,8 @@ class RegisterRequest extends FormRequest
         return [
             'email' => 'required|email|max:50|confirmed|unique:users',
             'username' => 'required|alpha_num|max:50|unique:users',
-            'password' => 'required|confirmed|min:8|regex:/(^[\S]{8,}$)/'
+            'password' => 'required|confirmed|min:8|regex:/(^[\S]{8,}$)/',
+            //'recaptcha' => 'required|recaptcha' // Uncomment if you need
         ];
     }
 }

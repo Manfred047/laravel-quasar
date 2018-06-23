@@ -1,4 +1,12 @@
 let mix = require('laravel-mix');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const map = require('./storage/json/dir-script-map');
+
+const dir = ((mix.inProduction()) ? map.prod : map.dev);
+
+if (mix.inProduction()) {
+    mix.version();
+}
 
 /*
  |--------------------------------------------------------------------------
@@ -13,35 +21,21 @@ let mix = require('laravel-mix');
 
 mix.babel([
     'resources/assets/js/plugins/secure.js'
-], 'public/js/secure.js');
+], dir.js.secure);
 
-mix.js('resources/assets/js/bootstrap.js', 'public/js');
-mix.js('resources/assets/js/app.js', 'public/js');
-mix.stylus('resources/assets/stylus/main.styl', 'public/css');
-mix.sass('resources/assets/sass/app.scss', 'public/css');
+mix.js('resources/assets/js/bootstrap.js', dir.js.bootstrap);
+mix.js('resources/assets/js/app.js', dir.js.app);
+mix.stylus('resources/assets/stylus/main.styl', dir.css.main);
+mix.sass('resources/assets/sass/app.scss', dir.css.app);
 
 mix.copyDirectory('resources/assets/template/img', 'public/img');
 
-if (mix.inProduction()) {
-    mix.version();
-} else {
-    //mix.sourceMaps();
-}
-
-// Fix for "run hot"
-Mix.listen('configReady', (webpackConfig) => {
-    if (Mix.isUsing('hmr')) {
-        // Remove leading '/' from entry keys
-        webpackConfig.entry = Object.keys(webpackConfig.entry).reduce((entries, entry) => {
-            entries[entry.replace(/^\//, '')] = webpackConfig.entry[entry];
-            return entries;
-        }, {});
-
-        // Remove leading '/' from ExtractTextPlugin instances
-        webpackConfig.plugins.forEach((plugin) => {
-            if (plugin.constructor.name === 'ExtractTextPlugin') {
-                plugin.filename = plugin.filename.replace(/^\//, '');
-            }
-        });
-    }
+mix.webpackConfig({
+    output: {
+        publicPath: '/',
+        chunkFilename: dir.chunks
+    },
+    plugins: [
+        new CleanWebpackPlugin([dir.clean])
+    ]
 });

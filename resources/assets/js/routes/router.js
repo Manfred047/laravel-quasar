@@ -1,52 +1,62 @@
 import VueRouter from 'vue-router';
+import { AuthManager } from './auth-manager';
 
-import {
-    Welcome,
-    User,
-    NotFount
-} from "./external-import/external-files";
-
-import WelcomeToolbar from '../components/layouts/WelcomeToolbar';
-import ErrorToolbar from '../components/error-pages/ErrorToolbar';
-import UserToolbar from '../components/layouts/UserToolbar';
+import * as All from "./external-import/external-files";
 
 const router =  new VueRouter({
     routes: [
         {
             path: '/',
-            name: 'welcome',
             components: {
-                default: Welcome,
-                'top-menu': WelcomeToolbar
+                default: All.PublicLayout,
+                'top-menu': All.WelcomeToolbar,
+                'app-footer': All.AppFooter
+            },
+            children: [
+                {
+                    path: '/',
+                    name: 'public.index',
+                    component: All.Welcome
+                }
+            ],
+            beforeEnter (to, from, next) {
+                AuthManager.optionalAuth(to, from, next);
             }
         },
         {
             path: '/user',
-            name: 'user',
             components: {
-                default: User,
-                'top-menu': UserToolbar
+                default: All.UserLayout,
+                'top-menu': All.UserToolbar,
+                'app-footer': All.AppFooter
             },
-            beforeEnter: (to, from, next) => {
-                router.app.$axios({
-                    method: 'get',
-                    headers: {'X-Requested-With': 'XMLHttpRequest'},
-                    url: router.app.$master.api('/oauth/check')
-                }).then((response) => {
-                    next();
-                }).catch((e) => {
-                    next({
-                        name: 'welcome'
-                    });
-                });
+            children: [
+                {
+                    path: '/',
+                    name: 'user.index',
+                    component: All.User
+                }
+            ],
+            beforeEnter (to, from, next) {
+                AuthManager.forceAuth(to, from, next);
             }
         },
         {
             path: '/error-404',
-            name: 'e404',
             components: {
-                default: NotFount,
-                'top-menu': ErrorToolbar
+                default: All.ErrorLayout,
+                'top-menu': All.ErrorToolbar,
+                'app-footer': All.AppFooter
+            },
+            children: [
+                {
+                    path: '/',
+                    name: 'e404',
+                    component: All.NotFound
+                }
+            ],
+            beforeEnter (to, from, next) {
+                AuthManager.optionalAuth(to, from, next);
             }
         },
         {
@@ -59,7 +69,10 @@ const router =  new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    // Some validations
+    if (typeof router.app.$root.$master.self === 'undefined') {
+        router.app.$root.$master.self = router.app.$root;
+        router.app.$root.$master._setAxiosDefault();
+    }
     next();
 });
 

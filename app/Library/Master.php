@@ -2,6 +2,7 @@
 
 namespace App\Library;
 
+use App\Traits\DirScriptMapTrait;
 use App\Traits\LoginTrait;
 use App\Traits\PureTrait;
 use App\Traits\RequestTrait;
@@ -20,9 +21,10 @@ class Master
     use PureTrait,
         RequestTrait,
         LoginTrait,
+        DirScriptMapTrait,
         SecureTrait;
 
-    protected static $_instance = NULL;
+    protected static $_instance = null;
 
     /**
      * Prevent direct object creation
@@ -40,7 +42,7 @@ class Master
      */
     final public static function getInstance()
     {
-        if(null !== static::$_instance) {
+        if (null !== static::$_instance) {
             return static::$_instance;
         }
         static::$_instance = new static();

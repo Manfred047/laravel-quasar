@@ -1,23 +1,30 @@
-const Welcome = resolve => {
-    require.ensure(['../../components/public/Welcome'], () => {
-        resolve(require('../../components/public/Welcome'));
-    }, 'js/public');
-};
+// Views
+const Welcome = () => import('../../components/public/Welcome');
+const User = () => import('../../components/auth/user/User');
+const NotFound = () => import('../../components/error-pages/NotFound');
 
-const User = resolve => {
-    require.ensure(['../../components/auth/user/User'], () => {
-        resolve(require('../../components/auth/user/User'));
-    }, 'js/user');
-};
+// Toolbars
+const ErrorToolbar = () => import('../../components/layouts/toolbars/ErrorToolbar');
+const WelcomeToolbar = () => import('../../components/layouts/toolbars/WelcomeToolbar');
+const UserToolbar = () => import('../../components/layouts/toolbars/UserToolbar');
 
-const NotFount = resolve => {
-    require.ensure(['../../components/error-pages/NotFount'], () => {
-        resolve(require('../../components/error-pages/NotFount'));
-    }, 'js/auth');
-};
+// Layouts
+const PublicLayout = () => import('../../components/layouts/master-layouts/PublicLayout');
+const UserLayout = () => import('../../components/layouts/master-layouts/UserLayout');
+const ErrorLayout = () => import('../../components/layouts/master-layouts/ErrorLayout');
+
+// Footers
+const AppFooter = () => import('../../components/layouts/footers/AppFooter');
 
 export {
     Welcome,
     User,
-    NotFount
+    NotFound,
+    ErrorToolbar,
+    WelcomeToolbar,
+    UserToolbar,
+    PublicLayout,
+    UserLayout,
+    ErrorLayout,
+    AppFooter
 };

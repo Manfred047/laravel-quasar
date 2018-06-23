@@ -1,4 +1,5 @@
 /node_modules
+/bower_components
 /public/hot
 /public/storage
 /storage/*.key
@@ -11,3 +12,10 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
+# dev mode
+# exclude everything
+/public/js/dev/*
+/public/css/dev/*
+# exception to the rule
+!/public/js/dev/.gitkeep
+!/public/css/dev/.gitkeep
