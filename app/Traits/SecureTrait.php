@@ -29,16 +29,4 @@ trait SecureTrait
         return bin2hex(random_bytes($ev));
     }
 
-    /**
-     * Genera un hash para compatibilidad de claves almacenadas en Solara
-     *
-     * @param $data
-     * @return string
-     */
-    public static function solaraHash($data)
-    {
-        $data = hash('sha256', $data, false);
-        $data = base64_encode($data);
-        return $data;
-    }
 }
