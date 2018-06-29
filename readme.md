@@ -7,7 +7,7 @@ Ejecuta los siguientes comandos:
 1. npm install
 2. composer install
 3. cp .env.example .env
-4. artisan key:generate
+4. php artisan key:generate
 5. php artisan migrate
 6. php artisan passport:install
 
@@ -138,7 +138,7 @@ Execute the following commands:
 1. npm install
 2. composer install
 3. cp .env.example .env
-4. artisan key:generate
+4. php artisan key:generate
 5. php artisan migrate
 6. php artisan passport:install
 
