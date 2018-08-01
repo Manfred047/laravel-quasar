@@ -74,31 +74,10 @@ class LoginController extends AccessTokenController
         $accessToken = auth()->user()->token();
         DB::table('oauth_refresh_tokens')
             ->where('access_token_id', $accessToken->id)
-            ->update([
-                'revoked' => true
-            ]);
-        $accessToken->revoke();
+            ->delete();
+        $accessToken->delete();
         cookie()->forget('oauth');
         return response()->json(['success' => 'ok']);
     }
 
-    /**
-     * Delete all user access tokens
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function revokeUserTokens()
-    {
-        $userTokens = auth()->user()->tokens()->get();
-        foreach($userTokens as $index=> $token) {
-            DB::table('oauth_refresh_tokens')
-                ->where('access_token_id', $token->id)
-                ->update([
-                    'revoked' => true
-                ]);
-            $token->revoke();
-        }
-        cookie()->forget('oauth');
-        return response()->json(['success' => 'ok']);
-    }
 }
