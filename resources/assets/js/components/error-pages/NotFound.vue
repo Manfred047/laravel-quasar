@@ -1,12 +1,5 @@
 <template>
-    <q-page class="bg-dark ">
-        <div class="row col-12 vertical-middle justify-center"
-             style="top: 50%;position: absolute;transform: translate(0,-50%);">
-            <div class="row col-md-6 justify-center">
-                <img :src="$master.url('/img/e404.png')" style="width: 100%;height: auto;">
-            </div>
-        </div>
-    </q-page>
+    <q-page class="image"></q-page>
 </template>
 
 <script>
@@ -16,5 +9,21 @@
 </script>
 
 <style scoped>
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
 
+    .image {
+        /* The image used */
+        background-image: url("/img/Optimized-e404.png");
+
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 </style>

@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+use App\User;
+use Illuminate\Support\Facades\DB;
+
 trait SecureTrait
 {
     /**
@@ -26,7 +29,53 @@ trait SecureTrait
      */
     public static function token($ev = 32)
     {
-        return bin2hex(random_bytes($ev));
+        try {
+            return bin2hex(random_bytes($ev));
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param $id
+     * @param $password
+     * @param $response
+     * @return bool|\Illuminate\Http\JsonResponse
+     */
+    public static function changePassword($id, $password, $response = false)
+    {
+        $user = User::findOrFail($id);
+        $user->password = $password;
+        $user->remember_token = null;
+        $user->saveOrFail();
+        return self::revokeAllUserTokens($user, $response);
+    }
+
+    /**
+     * Elimina todos los tokens de acceso del usuario
+     *
+     * @param User $user
+     * @param bool $response
+     * @return bool|\Illuminate\Http\JsonResponse
+     */
+    public static function revokeAllUserTokens(User $user, $response = false)
+    {
+        $userTokens = $user->tokens()->pluck('id');
+
+        DB::table('oauth_refresh_tokens')
+            ->whereIn('access_token_id', $userTokens)
+            ->delete();
+
+        DB::table('oauth_access_tokens')
+            ->whereIn('id', $userTokens)
+            ->delete();
+
+        if ($response) {
+            cookie()->forget('oauth');
+            return response()->json(['success' => 'ok']);
+        }
+
+        return true;
     }
 
 }
