@@ -1,9 +1,17 @@
 <?php
+/**
+ * @copyright 2018 Manfred047
+ * @author Emanuel Chablé Concepción <manfred@manfred047.com>
+ * @version 1.0.0
+ * @website: https://manfred047.com
+ * @github https://github.com/Manfred047
+ */
 
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordRequest;
+use App\Library\Master;
 use App\PasswordReset;
 use App\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -17,33 +25,19 @@ class ResetPasswordController extends Controller
     {
         // Get token data
         $password = PasswordReset::where([
-            ['email', $request->email],
-            ['token', $request->token]
+            ['email', $request->get('email')],
+            ['token', $request->get('token')]
         ])->firstOrFail();
         // Get user data, then update user
         $user = User::findOrFail($password->user_id);
-        $user->password = $request->password;
+        $user->password = $request->get('password');
         $user->remember_token = null;
         $user->saveOrFail();
-        $this->revokeAllUserTokens($user);
         // disable token
         $password->token = null;
         $password->save();
-        // response
-        return response()->json(['success' => 'ok']);
-    }
-
-    public function revokeAllUserTokens($user)
-    {
-        $userTokens = $user->tokens()->get();
-        foreach($userTokens as $index=> $token) {
-            DB::table('oauth_refresh_tokens')
-                ->where('access_token_id', $token->id)
-                ->update([
-                    'revoked' => true
-                ]);
-            $token->revoke();
-        }
+        // Revoke all tokens
+        return Master::revokeAllUserTokens($user, true);
     }
 
 }

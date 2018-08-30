@@ -1,4 +1,11 @@
 <?php
+/**
+ * @copyright 2018 Manfred047
+ * @author Emanuel Chablé Concepción <manfred@manfred047.com>
+ * @version 1.0.0
+ * @website: https://manfred047.com
+ * @github https://github.com/Manfred047
+ */
 
 namespace App\Http\Controllers\Auth;
 
@@ -35,7 +42,7 @@ class LoginController extends AccessTokenController
             ], 422);
         }
         if (isset($data['access_token'])) {
-            return response()->json(['success' => 'ok'])
+            return Master::success()
                 ->cookie('oauth', $data['access_token'], Master::passportCookieLifetime());
         }
         return $tokenResponse;
@@ -50,12 +57,12 @@ class LoginController extends AccessTokenController
     public function check(Request $request)
     {
         $info = [
-            'auth' => auth()->guard('api')->check(),
+            'auth' => auth('api')->check(),
             'data' => []
         ];
-        if ($request->filled('details') && $request->details === '1') {
+        if ($request->filled('details') && $request->get('details') === '1') {
             if ($info['auth']) {
-                $user = User::findOrFail(auth()->guard('api')->user()->id);
+                $user = User::findOrFail($request->user('api')->id);
                 $info['data'] = UserResource::make($user);
                 return response()->json($info);
             }
@@ -67,17 +74,18 @@ class LoginController extends AccessTokenController
     /**
      * Logout
      *
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function logout()
+    public function logout(Request $request)
     {
-        $accessToken = auth()->user()->token();
+        $accessToken = $request->user()->token();
         DB::table('oauth_refresh_tokens')
             ->where('access_token_id', $accessToken->id)
             ->delete();
         $accessToken->delete();
         cookie()->forget('oauth');
-        return response()->json(['success' => 'ok']);
+        return Master::success();
     }
 
 }

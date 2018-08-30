@@ -165,7 +165,6 @@
                     url: this.$master.api('/register'),
                     data: this.form
                 }).then((response) => {
-                    this.loader = false;
                     this.show = false;
                     if (response.data.success === 'ok') {
                         this.reloadAuthStatus();
@@ -176,15 +175,20 @@
                         type: 'positive'
                     });
                 }).catch((errors) => {
-                    this.loader = false;
-                    if (errors) {
-                        let errorList = errors.errors;
-                        for (const key of Object.keys(errorList)) {
-                            if (errorList.hasOwnProperty(key)) {
-                                this.errors.add(key, errorList[key][0], key);
+                    let list = this.$master.hasErrors(errors);
+                    if (list) {
+                        for (const key of Object.keys(list)) {
+                            if (list.hasOwnProperty(key)) {
+                                this.errors.add({
+                                    field: key,
+                                    msg: list[key][0],
+                                    rule: key
+                                });
                             }
                         }
                     }
+                }).finally(() => {
+                    this.loader = false;
                 });
             },
             clean() {

@@ -6,6 +6,7 @@ use App\Traits\DirScriptMapTrait;
 use App\Traits\LoginTrait;
 use App\Traits\PureTrait;
 use App\Traits\RequestTrait;
+use App\Traits\ResponseTrait;
 use App\Traits\SecureTrait;
 
 /**
@@ -20,6 +21,7 @@ class Master
 {
     use PureTrait,
         RequestTrait,
+        ResponseTrait,
         LoginTrait,
         DirScriptMapTrait,
         SecureTrait;

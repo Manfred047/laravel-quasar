@@ -107,14 +107,12 @@
                     data: this.form
                 }).then((response) => {
                     this.setAuthStatus(true);
-                    this.loader = false;
                     this.show = false;
                     this.$q.notify({
                         message: this.$t('login.success_login'),
                         type: 'positive'
                     });
                 }).catch((errors) => {
-                    this.loader = false;
                     let list = this.$master.hasErrors(errors);
                     if (list) {
                         let message = this.$master.getValue(errors, ['response', 'data', 'message']);
@@ -122,10 +120,16 @@
                         for (const key of Object.keys(list)) {
                             if (list.hasOwnProperty(key)) {
                                 type = ((message === 'invalid_credentials') ? 'auth' : key);
-                                this.errors.add(key, list[key][0], type);
+                                this.errors.add({
+                                    field: key,
+                                    msg: list[key][0],
+                                    rule: type
+                                });
                             }
                         }
                     }
+                }).finally(() => {
+                    this.loader = false;
                 });
             },
             clean() {
