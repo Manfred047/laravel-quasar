@@ -1,9 +1,17 @@
 <?php
+/**
+ * @copyright 2018 Manfred047
+ * @author Emanuel Chablé Concepción <manfred@manfred047.com>
+ * @version 1.0.0
+ * @website: https://manfred047.com
+ * @github https://github.com/Manfred047
+ */
 
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RecoveryRequest;
+use App\Library\Master;
 use App\Mail\Recovery;
 use App\PasswordReset;
 use App\User;
@@ -35,7 +43,7 @@ class ForgotPasswordController extends Controller
         Mail::to($user->email)
             ->send(new Recovery($data));
         // Response
-        return response()->json(['success' => 'ok']);
+        return Master::success();
     }
 
 }

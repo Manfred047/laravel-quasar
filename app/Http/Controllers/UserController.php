@@ -9,6 +9,6 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        return UserResource::make(auth()->user());
+        return UserResource::make($request->user());
     }
 }

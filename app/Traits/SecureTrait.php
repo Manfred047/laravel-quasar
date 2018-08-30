@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Library\Master;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
@@ -72,7 +73,7 @@ trait SecureTrait
 
         if ($response) {
             cookie()->forget('oauth');
-            return response()->json(['success' => 'ok']);
+            return Master::success();
         }
 
         return true;

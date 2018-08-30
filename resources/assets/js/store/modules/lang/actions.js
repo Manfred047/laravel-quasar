@@ -62,7 +62,7 @@ export default {
             master.self.$moment.locale(momentLang(lang));
             commit('SET_LANGUAGE', lang);
         } catch (e) {
-            console.log('lang_error', e);
+            //console.log('lang_error', e);
         }
     }
 }
