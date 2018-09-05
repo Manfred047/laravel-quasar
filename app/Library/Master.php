@@ -1,4 +1,11 @@
 <?php
+/**
+ * @copyright 2018 Manfred047
+ * @author Emanuel Chablé Concepción <manfred@manfred047.com>
+ * @version 1.0.0
+ * @website: https://manfred047.com
+ * @github https://github.com/Manfred047
+ */
 
 namespace App\Library;
 
@@ -8,14 +15,6 @@ use App\Traits\PureTrait;
 use App\Traits\RequestTrait;
 use App\Traits\ResponseTrait;
 use App\Traits\SecureTrait;
-
-/**
- *
- * @author Manfred047 <github.com/manfred047>
- * @email manfred@manfred047.com
- * Class Master
- * @package App\Library
- */
 
 class Master
 {

@@ -25,66 +25,66 @@ y ahora puedes abrir en tu navegador: http://127.0.0.1:8000
  #### Plugins (Como Vue plugins o plugins propios)
  ##### Incluye la configuración de Quasar.
  
- + Manejador de plugins: "plugins.js" en "resources/assets/js/plugins/plugins.js".
+ + Manejador de plugins: "plugins.js" en "resources/js/plugins/plugins.js".
  
  #### Componentes (Puedes registrar componentes globales)
  
- + Manejador de componentes: "components.js" en "resources/assets/js/components/components.js"
+ + Manejador de componentes: "components.js" en "resources/js/components/components.js"
  
  #### Directivas (directivas de Vue)
  
- * Manejador de directivas: "directives.js" en "resources/assets/js/directives/directives.js"
+ * Manejador de directivas: "directives.js" en "resources/js/directives/directives.js"
  
  #### Filtros (Filtros de Vue)
  
- + Manejador de filtros: "filter.js" en "resources/assets/js/filters/filters.js"
+ + Manejador de filtros: "filter.js" en "resources/js/filters/filters.js"
  
  #### Lenguages (Para Vue language)
  ##### Puedes agregar o editar nuevos lenguages en el directorio "locale"
  
- * Manejador de idiomas: "i18n.js" en "resources/assets/js/lang/i18n.js"
+ * Manejador de idiomas: "i18n.js" en "resources/js/lang/i18n.js"
  
  #### Rutas (Vue router)
  
- * Manejador de rutas: "router.js" en "resources/assets/js/routes/router.js"
+ * Manejador de rutas: "router.js" en "resources/js/routes/router.js"
 
 ##### El Router incluye al auth manager
 
 * Manejador de auth: "auth-manager.js" en "router path".
 
 ##### Archivos asincronos (por ejemplo, componentes)
-* Manejador de componentes asincronos (para el router): "external-files.js" en "resources/assets/js/routes/external-import/external-files.js"
+* Manejador de componentes asincronos (para el router): "external-files.js" en "resources/js/routes/external-import/external-files.js"
 
 #### Vuex
 ##### Puedes usar Vuex
 
-* Manejador de vuex: "store.js" en "resources/assets/js/store/store.js"
+* Manejador de vuex: "store.js" en "resources/js/store/store.js"
 
 ##### Puedes agregar o editar modulos de vuex
 
-* Directorio de modulos: "resources/assets/js/store/modules"
+* Directorio de modulos: "resources/js/store/modules"
 
 #### Manejador de la App
 ##### Nucleo de vue (Incluye todas las configuraciones)
 
-* Nucleo: "App.js" en "resources/assets/js/app.js"
+* Nucleo: "App.js" en "resources/js/app.js"
 
  ## Estructura del CSS
  #### SASS
  
- * Para variables personalizadas: "_variables.scss" en "resources/assets/sass/_variables.scss"
+ * Para variables personalizadas: "_variables.scss" en "resources/sass/_variables.scss"
  
- * Para plugins o diseño: "app.scss" en "resources/assets/sass/app.scss"
+ * Para plugins o diseño: "app.scss" en "resources/sass/app.scss"
  
  #### STYLUS
  ##### Este directorio contiene el Stylus de Quasar
  
- * Quasar Stylus: "main.styl" en "resources/assets/stylus/main.styl"
+ * Quasar Stylus: "main.styl" en "resources/stylus/main.styl"
 
 #### Directorio de modelos (temas)
 ##### Puedes guardar imagenes u otros complementos en este directorio
 
-* Directorio de modelos: "resources/assets/template"
+* Directorio de modelos: "resources/template"
 
 #### Manejador de mapa de scripts
 ##### Este archivo contiene las ubicaciones de cada script (js/css).
@@ -156,66 +156,66 @@ And you should be ready to open: http://127.0.0.1:8000
  #### Plugins (Like Vue plugins or custom plugins)
  ##### Includes Quasar config.
  
- + Plugin manager: "plugins.js" in "resources/assets/js/plugins/plugins.js".
+ + Plugin manager: "plugins.js" in "resources/js/plugins/plugins.js".
  
  #### Components (You can register a global components)
  
- + Component manager: "components.js" in "resources/assets/js/components/components.js"
+ + Component manager: "components.js" in "resources/js/components/components.js"
  
  #### Directives (Vue directives)
  
- * Directive manager: "directives.js" in "resources/assets/js/directives/directives.js"
+ * Directive manager: "directives.js" in "resources/js/directives/directives.js"
  
  #### Filters (Vue filters)
  
- + Filter manager: "filter.js" in "resources/assets/js/filters/filters.js"
+ + Filter manager: "filter.js" in "resources/js/filters/filters.js"
  
  #### Language (For Vue lang)
  ##### You can edit or add new languages on "locale folder"
  
- * Language manager: "i18n.js" in "resources/assets/js/lang/i18n.js"
+ * Language manager: "i18n.js" in "resources/js/lang/i18n.js"
  
  #### Router (Vue router)
  
- * Router manager: "router.js" in "resources/assets/js/routes/router.js"
+ * Router manager: "router.js" in "resources/js/routes/router.js"
 
 ##### Router includes an auth manager
 
 * Auth manager: "auth-manager.js" in "router path".
 
 ##### Async files (Like components)
-* Async component manager (for router): "external-files.js" in "resources/assets/js/routes/external-import/external-files.js"
+* Async component manager (for router): "external-files.js" in "resources/js/routes/external-import/external-files.js"
 
 #### Vuex
 ##### You can use Vuex
 
-* Vuex manager: "store.js" in "resources/assets/js/store/store.js"
+* Vuex manager: "store.js" in "resources/js/store/store.js"
 
 ##### You can add or edit new modules for vuex
 
-* Module path: "resources/assets/js/store/modules"
+* Module path: "resources/js/store/modules"
 
 #### App manager
 ##### Vue core (Include all configs)
 
-* Core: "App.js" in "resources/assets/js/app.js"
+* Core: "App.js" in "resources/js/app.js"
 
  ## CSS Structure
  #### SASS
  
- * For custom variables: "_variables.scss" in "resources/assets/sass/_variables.scss"
+ * For custom variables: "_variables.scss" in "resources/sass/_variables.scss"
  
- * For Plugins or template: "app.scss" in "resources/assets/sass/app.scss"
+ * For Plugins or template: "app.scss" in "resources/sass/app.scss"
  
  #### STYLUS
  ##### This directory contains Quasar Stylus
  
- * Quasar Stylus: "main.styl" in "resources/assets/stylus/main.styl"
+ * Quasar Stylus: "main.styl" in "resources/stylus/main.styl"
 
 #### Template directory
 ##### You can save images and other assets
 
-* Template directory: "resources/assets/template"
+* Template directory: "resources/template"
 
 #### Script map manager
 ##### This file registers scripts path.
@@ -255,7 +255,7 @@ And you should be ready to open: http://127.0.0.1:8000
 
 #### Router (Laravel Api)
 
-* Api router: "api.php" in "routes/api.php"
+* Api router: "api.php" in "routes/api/api.php"
 
 ## Important
 

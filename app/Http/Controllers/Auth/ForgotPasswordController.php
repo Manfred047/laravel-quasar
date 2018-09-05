@@ -15,16 +15,22 @@ use App\Library\Master;
 use App\Mail\Recovery;
 use App\PasswordReset;
 use App\User;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
 
+    /**
+     * Send recovery email
+     *
+     * @param RecoveryRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
+     */
     public function store(RecoveryRequest $request)
     {
         // Get user data
-        $user = User::where('email', $request->email)
+        $user = User::where('email', $request->get('email'))
             ->firstOrFail();
         // Generate secure token
         $token = str_random(20);

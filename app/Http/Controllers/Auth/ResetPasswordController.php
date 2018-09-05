@@ -14,13 +14,16 @@ use App\Http\Requests\PasswordRequest;
 use App\Library\Master;
 use App\PasswordReset;
 use App\User;
-use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ResetPasswordController extends Controller
 {
 
+    /**
+     * Regenerate user password
+     *
+     * @param PasswordRequest $request
+     * @return mixed
+     */
     public function store(PasswordRequest $request)
     {
         // Get token data

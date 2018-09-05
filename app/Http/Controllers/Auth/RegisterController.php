@@ -17,17 +17,14 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
 
+    /**
+     * Store new user
+     *
+     * @param RegisterRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
+     */
     public function store(RegisterRequest $request)
     {
         $user = new User();
@@ -42,6 +39,13 @@ class RegisterController extends Controller
         return response()->json(['success' => 'warning']);
     }
 
+    /**
+     * Auth new user
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws \Exception
+     */
     public function autoLogin(Request $request)
     {
         $data = [
@@ -51,5 +55,4 @@ class RegisterController extends Controller
         ];
         return Master::request(route('api.auth.login'), 'post', $data);
     }
-
 }
