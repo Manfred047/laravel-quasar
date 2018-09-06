@@ -1,4 +1,4 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const map = require('./storage/json/dir-script-map');
 
@@ -20,15 +20,15 @@ if (mix.inProduction()) {
  */
 
 mix.babel([
-    'resources/assets/js/plugins/secure.js'
+    'resources/js/plugins/secure.js'
 ], dir.js.secure);
 
-mix.js('resources/assets/js/bootstrap.js', dir.js.bootstrap);
-mix.js('resources/assets/js/app.js', dir.js.app);
-mix.stylus('resources/assets/stylus/main.styl', dir.css.main);
-mix.sass('resources/assets/sass/app.scss', dir.css.app);
+mix.js('resources/js/bootstrap.js', dir.js.bootstrap);
+mix.js('resources/js/app.js', dir.js.app);
+mix.stylus('resources/stylus/main.styl', dir.css.main);
+mix.sass('resources/sass/app.scss', dir.css.app);
 
-mix.copyDirectory('resources/assets/template/img', 'public/img');
+mix.copyDirectory('resources/template/img', 'public/img');
 
 mix.webpackConfig({
     output: {

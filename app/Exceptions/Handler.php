@@ -39,10 +39,9 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -61,12 +60,12 @@ class Handler extends ExceptionHandler
         switch (true) {
             case $exception instanceof TokenMismatchException:
                 return response()->json([
-                    'error' => 'unauthenticated',
+                    'error' => 'authentication_timeout',
                     'message' => 'Authentication Timeout'
                 ], 419);
             case $exception instanceOf ModelNotFoundException:
                 return response()->json([
-                    'error' => 'Not Found',
+                    'error' => 'not_found',
                     'message' => 'Not Found'
                 ], 404);
         }
@@ -88,4 +87,5 @@ class Handler extends ExceptionHandler
             'message' => 'Unauthenticated',
         ], 401);
     }
+
 }

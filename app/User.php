@@ -9,13 +9,15 @@
 
 namespace App;
 
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -42,11 +44,14 @@ class User extends Authenticatable
         'password' => 'string'
     ];
 
+    // METHODS
     public function findForPassport($identifier) {
         return $this->where('email', $identifier)
             ->orWhere('username', $identifier)
             ->first();
     }
+
+    // SETTERS
 
     public function setEmailAttribute($value)
     {
@@ -55,6 +60,7 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = Bcrypt($value);
+        $this->attributes['password'] = bcrypt($value);
     }
+
 }

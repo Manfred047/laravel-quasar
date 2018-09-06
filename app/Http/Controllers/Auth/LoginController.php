@@ -20,6 +20,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class LoginController extends AccessTokenController
 {
+
     /**
      * Session start
      *
