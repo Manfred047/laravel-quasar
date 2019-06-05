@@ -1,46 +1,39 @@
 <?php
-/**
- * @copyright 2018 Manfred047
- * @author Emanuel Chablé Concepción <manfred@manfred047.com>
- * @version 1.0.0
- * @website: https://manfred047.com
- * @github https://github.com/Manfred047
- */
 
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PasswordRequest;
-use App\Library\Master;
-use App\PasswordReset;
-use App\User;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Password Reset Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for handling password reset requests
+    | and uses a simple trait to include this behavior. You're free to
+    | explore this trait and override any methods you wish to tweak.
+    |
+    */
+
+    use ResetsPasswords;
 
     /**
-     * Regenerate user password
+     * Where to redirect users after resetting their password.
      *
-     * @param PasswordRequest $request
-     * @return mixed
+     * @var string
      */
-    public function store(PasswordRequest $request)
-    {
-        // Get token data
-        $password = PasswordReset::where([
-            ['email', $request->get('email')],
-            ['token', $request->get('token')]
-        ])->firstOrFail();
-        // Get user data, then update user
-        $user = User::findOrFail($password->user_id);
-        $user->password = $request->get('password');
-        $user->remember_token = null;
-        $user->saveOrFail();
-        // disable token
-        $password->token = null;
-        $password->save();
-        // Revoke all tokens
-        return Master::revokeAllUserTokens($user, true);
-    }
+    protected $redirectTo = '/home';
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
 }

@@ -1,23 +1,14 @@
 <?php
-/**
- * @copyright 2018 Manfred047
- * @author Emanuel Chablé Concepción <manfred@manfred047.com>
- * @version 1.0.0
- * @website: https://manfred047.com
- * @github https://github.com/Manfred047
- */
 
 namespace App;
 
-use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
-use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -37,30 +28,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
     protected $casts = [
-        'id' => 'integer',
-        'username' => 'string',
-        'email' => 'string',
-        'password' => 'string'
+        'email_verified_at' => 'datetime',
     ];
-
-    // METHODS
-    public function findForPassport($identifier) {
-        return $this->where('email', $identifier)
-            ->orWhere('username', $identifier)
-            ->first();
-    }
-
-    // SETTERS
-
-    public function setEmailAttribute($value)
-    {
-        $this->attributes['email'] = mb_strtolower($value, 'UTF-8');
-    }
-
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
-
 }

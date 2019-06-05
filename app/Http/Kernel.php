@@ -1,11 +1,4 @@
 <?php
-/**
- * @copyright 2018 Manfred047
- * @author Emanuel Chablé Concepción <manfred@manfred047.com>
- * @version 1.0.0
- * @website: https://manfred047.com
- * @github https://github.com/Manfred047
- */
 
 namespace App\Http;
 
@@ -47,25 +40,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
-            \App\Http\Middleware\VerifyIsAjax::class
         ],
-    ];
-
-    /**
-     * Responsible for prioritizing the middleware
-     *
-     * info: vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php
-     *
-     * @var array
-     */
-    protected $middlewarePriority = [
-        \App\Http\Middleware\InjectAuthToken::class, // important
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Illuminate\Auth\Middleware\Authenticate::class,
-        \Illuminate\Session\Middleware\AuthenticateSession::class,
-        \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        \Illuminate\Auth\Middleware\Authorize::class,
     ];
 
     /**
@@ -85,8 +60,21 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'client.grants' => \App\Http\Middleware\VerifyGrantType::class,
-        'client.details' => \App\Http\Middleware\InjectClientDetails::class,
-        'client.oauth' => \App\Http\Middleware\InjectAuthToken::class,
+    ];
+
+    /**
+     * The priority-sorted list of middleware.
+     *
+     * This forces non-global middleware to always be in the given order.
+     *
+     * @var array
+     */
+    protected $middlewarePriority = [
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \App\Http\Middleware\Authenticate::class,
+        \Illuminate\Session\Middleware\AuthenticateSession::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        \Illuminate\Auth\Middleware\Authorize::class,
     ];
 }

@@ -1,69 +1,97 @@
 {
-    "name": "laravel-quasar",
-    "version": "1.0.0",
-    "description": "Laravel with Quasar Framework (SPA) by Manfred047.",
-    "keywords": [
-        "laravel",
-        "php",
-        "vuejs",
-        "vue",
-        "quasar",
-        "js",
-        "phone",
-        "tablet",
-        "desktop",
-        "spa",
-        "pwa",
-        "website",
-        "electron"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Manfred047/laravel-quasar.git"
-    },
-    "author": {
-        "name": "Emanuel Chable Concepcion",
-        "email": "manfred@manfred047.com",
-        "url": "https://manfred047.com/"
-    },
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/Manfred047/laravel-quasar/issues"
-    },
-    "homepage": "http://quasar-framework.org",
-    "scripts": {
-        "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
-    },
-    "devDependencies": {
-        "axios": "^0.18.0",
-        "babel-plugin-syntax-dynamic-import": "^6.18.0",
-        "clean-webpack-plugin": "^1.0.1",
-        "cross-env": "^5.2.0",
-        "laravel-mix": "^4.0.14",
-        "lodash": "^4.17.11",
-        "moment": "^2.24.0",
-        "moment-timezone": "^0.5.23",
-        "quasar-extras": "^2.0.9",
-        "quasar-framework": "^0.17.19",
-        "resolve-url-loader": "^3.0.0",
-        "sass": "^1.17.0",
-        "sass-loader": "^7.1.0",
-        "stylus": "^0.54.5",
-        "stylus-loader": "^3.0.2",
-        "vee-validate": "^2.1.7",
-        "vue": "^2.6.5",
-        "vue-i18n": "^8.8.1",
-        "vue-moment": "^4.0.0",
-        "vue-recaptcha": "^1.1.1",
-        "vue-router": "^3.0.2",
-        "vue-template-compiler": "^2.6.5",
-        "vuex": "^3.1.0",
-        "webpack-require-http": "^0.4.3"
-    }
+  "name": "laravel-quasar",
+  "version": "1.0.0",
+  "description": "Laravel with Quasar Framework (SPA) by Manfred047.",
+  "productName": "Laravel with Quasar Framework",
+  "cordovaId": "com.manfred047",
+  "keywords": [
+    "laravel",
+    "php",
+    "vuejs",
+    "vue",
+    "quasar",
+    "js",
+    "phone",
+    "tablet",
+    "desktop",
+    "spa",
+    "pwa",
+    "website",
+    "electron"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Manfred047/laravel-quasar.git"
+  },
+  "author": {
+    "name": "Emanuel Chable Concepcion",
+    "email": "manfred@manfred047.com",
+    "url": "https://manfred047.com/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Manfred047/laravel-quasar/issues"
+  },
+  "homepage": "https://quasar-framework.org",
+  "private": true,
+  "scripts": {
+    "mix-dev": "npm run development",
+    "mix-development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "mix-watch": "npm run development -- --watch",
+    "mix-watch-poll": "npm run watch -- --watch-poll",
+    "mix-hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "mix-prod": "npm run production",
+    "mix-production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "lint": "eslint --ext .js,.vue src",
+    "q-ssr-build": "quasar build -m ssr",
+    "q-ssr-dev": "quasar dev -m ssr",
+    "q-spa-build": "quasar build",
+    "q-spa-dev": "quasar dev"
+  },
+  "devDependencies": {
+    "@quasar/app": "^1.0.0-rc.6",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.3",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-vue": "^5.2.2",
+    "laravel-mix": "^4.0.7",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.20.3",
+    "sass-loader": "^7.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "symlink-webpack-plugin": "^0.2.0",
+    "webpack-require-http": "^0.4.3"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.1.2",
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.25",
+    "popper.js": "^1.15.0",
+    "quasar": "^1.0.0-rc.4",
+    "vee-validate": "^2.2.9",
+    "vue": "^2.6.10",
+    "vue-i18n": "^8.11.2",
+    "vue-moment": "^4.0.0",
+    "vue-recaptcha": "^1.1.1",
+    "vue-router": "^3.0.6",
+    "vuex": "^3.1.1"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "browserslist": [
+    "last 1 version, not dead, ie >= 11"
+  ]
 }

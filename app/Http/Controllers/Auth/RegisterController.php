@@ -1,58 +1,72 @@
 <?php
-/**
- * @copyright 2018 Manfred047
- * @author Emanuel Chablé Concepción <manfred@manfred047.com>
- * @version 1.0.0
- * @website: https://manfred047.com
- * @github https://github.com/Manfred047
- */
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Requests\RegisterRequest;
-use App\Library\Master;
 use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Register Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
+
+    use RegistersUsers;
 
     /**
-     * Store new user
+     * Where to redirect users after registration.
      *
-     * @param RegisterRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Throwable
+     * @var string
      */
-    public function store(RegisterRequest $request)
+    protected $redirectTo = '/home';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $user = new User();
-        $user->email = $request->get('email');
-        $user->username = $request->get('username');
-        $user->password = $request->get('password');
-        $user->saveOrFail();
-        $response = $this->autoLogin($request);
-        if ($response->getStatusCode() === 200) {
-            return $response;
-        }
-        return response()->json(['success' => 'warning']);
+        $this->middleware('guest');
     }
 
     /**
-     * Auth new user
+     * Get a validator for an incoming registration request.
      *
-     * @param Request $request
-     * @return mixed
-     * @throws \Exception
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function autoLogin(Request $request)
+    protected function validator(array $data)
     {
-        $data = [
-            'username' => $request->get('email'),
-            'password' => $request->get('password'),
-            'grant_type' => 'password'
-        ];
-        return Master::request(route('api.auth.login'), 'post', $data);
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
     }
 }
