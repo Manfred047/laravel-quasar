@@ -65,7 +65,7 @@ module.exports = function (ctx) {
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
-      distDir: 'public/js',
+      distDir: 'public/quasar',
       // extractCSS: false,
       extendWebpack (cfg) {
         cfg.module.rules.push({
@@ -76,15 +76,7 @@ module.exports = function (ctx) {
         })
 
         if (ctx.prod) {
-          cfg.plugins.push(new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, 'public_files'),
-            to: '',
-          }]))
-
-          cfg.plugins.push(new SymlinkWebpackPlugin({
-            origin: '../storage/app/public',
-            symlink: 'storage'
-          }))
+          cfg.output.publicPath = '/quasar/'
         }
       }
     },
