@@ -6,7 +6,18 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted () {
+    this.getTest()
+  },
+  methods: {
+    getTest () {
+      this.$axios.get(process.env.API_URL)
+        .then(response => {
+          console.log(response.data)
+        })
+    }
+  }
 }
 </script>
 

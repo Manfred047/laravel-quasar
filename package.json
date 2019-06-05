@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0-rc.6",
+    "@quasar/quasar-app-extension-dotenv": "^1.0.0-beta.10",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",

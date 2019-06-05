@@ -66,6 +66,7 @@ module.exports = function (ctx) {
       // gzip: true,
       // analyze: true,
       distDir: 'public/quasar',
+      // publicPath: '/quasar/',
       // extractCSS: false,
       extendWebpack (cfg) {
         cfg.module.rules.push({
@@ -83,7 +84,8 @@ module.exports = function (ctx) {
 
     devServer: {
       // https: true,
-      // port: 8080,
+      port: process.env.PORT | 8080,
+      host: process.env.HOST | '127.0.0.1',
       open: true // opens browser window automatically
     },
 
