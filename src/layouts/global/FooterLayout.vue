@@ -10,7 +10,7 @@
           Nyami.
         </a>
         The official website for Manfred047 is
-        <a class="q-mx-sm text-cyan" href="https://Manfred047.com"> manfred047.com</a>
+        <a class="q-mx-sm text-cyan" href="https://Manfred047.com" target="_blank"> manfred047.com</a>
       </div>
     </q-toolbar>
   </q-footer>
