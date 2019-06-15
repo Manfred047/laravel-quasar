@@ -1,10 +1,8 @@
 // Configuration for your app
-const path = require('path')
-const SymlinkWebpackPlugin = require('symlink-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = function (ctx) {
   return {
+    preFetch: true,
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
@@ -41,7 +39,11 @@ module.exports = function (ctx) {
         'QList',
         'QItem',
         'QItemSection',
-        'QItemLabel'
+        'QItemLabel',
+        'QScrollArea',
+        'QAvatar',
+        'QImg',
+        'QFooter'
       ],
 
       directives: [
@@ -50,7 +52,8 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'Cookies'
       ]
 
       // iconSet: 'ionicons-v4'
@@ -85,8 +88,8 @@ module.exports = function (ctx) {
     devServer: {
       // https: true,
       port: process.env.PORT | 8080,
-      host: process.env.HOST | '127.0.0.1',
-      open: true // opens browser window automatically
+      host: process.env.HOST | 'localhost',
+      open: true // opens browser window automatically,
     },
 
     // animations: 'all', // --- includes all animations
