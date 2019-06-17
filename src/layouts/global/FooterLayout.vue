@@ -1,16 +1,18 @@
 <template>
   <q-footer elevated reveal>
     <q-toolbar class="bg-white">
-      <div class="row justify-center q-pa-sm text-weight-bold text-grey-10">
-        <span class="col-12 text-center">
+      <div class="row full-width text-center q-pa-sm text-weight-bold text-grey-10">
+        <div class="col-12">
           Manfred047.com © 2018. All rights reserved.
-        </span>
-        Multimedia is copyrighted by
-        <a class="q-mx-sm text-cyan" href="https://www.facebook.com/Nyamuhh" target="_blank">
-          Nyami.
-        </a>
-        The official website for Manfred047 is
-        <a class="q-mx-sm text-cyan" href="https://Manfred047.com" target="_blank"> manfred047.com</a>
+        </div>
+        <div class="col-12">
+          Multimedia is copyrighted by
+          <a class="text-cyan" href="https://www.facebook.com/Nyamuhh" target="_blank">
+            Nyami.
+          </a>
+          The official website for Manfred047 is
+          <a class="text-cyan" href="https://Manfred047.com" target="_blank"> manfred047.com</a>
+        </div>
       </div>
     </q-toolbar>
   </q-footer>
