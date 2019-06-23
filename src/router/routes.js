@@ -14,13 +14,13 @@ const routes = [
       {
         path: '/login',
         name: 'public.login',
-        component: import('pages/public/Login.vue'),
+        component: () => import('pages/public/Login.vue'),
         meta: { requiresAuth: false }
       },
       {
         path: '/register',
-        name: 'Register.login',
-        component: import('pages/public/Register.vue'),
+        name: 'public.register',
+        component: () => import('pages/public/Register.vue'),
         meta: { requiresAuth: false }
       }
     ]

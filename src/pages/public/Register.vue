@@ -1,7 +1,7 @@
 <template>
-  <qpage>
+  <q-page>
     <div>register</div>
-  </qpage>
+  </q-page>
 </template>
 
 <script>
