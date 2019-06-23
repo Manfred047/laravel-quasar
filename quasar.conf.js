@@ -43,7 +43,8 @@ module.exports = function (ctx) {
         'QScrollArea',
         'QAvatar',
         'QImg',
-        'QFooter'
+        'QFooter',
+        'QBtnDropdown'
       ],
 
       directives: [

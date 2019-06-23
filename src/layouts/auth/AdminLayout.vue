@@ -12,10 +12,9 @@
         </q-btn>
 
         <q-toolbar-title>
-          Quasar App
+          Laravel 5.8 with Quasar v{{$q.version}} (SPA) by Manfred047
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
