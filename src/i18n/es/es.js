@@ -11,3 +11,5 @@ const es = {
 }
 
 export { es }
+
+export default es

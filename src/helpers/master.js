@@ -5,6 +5,9 @@ const master = {
   getCookieName () {
     return process.env.AUTH_COOKIE_NAME
   },
+  getLangCookieName () {
+    return process.env.LANG_COOKIE_NAME
+  },
   /**
      * Opcion para obtener la url base de la api
      *

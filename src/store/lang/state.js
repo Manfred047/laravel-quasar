@@ -1,3 +1,13 @@
 export default {
-  lang: 'en'
+  language: 'en',
+  langList: [
+    {
+      label: 'Español',
+      value: 'es'
+    },
+    {
+      label: 'English',
+      value: 'en'
+    }
+  ]
 }

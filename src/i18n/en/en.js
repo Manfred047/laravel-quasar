@@ -11,3 +11,5 @@ const en = {
 }
 
 export { en }
+
+export default en

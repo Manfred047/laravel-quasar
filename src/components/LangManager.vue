@@ -1,26 +1,33 @@
 <template>
   <div class="q-pa-md">
-    <q-btn-dropdown unelevated label="Lang">
-      <q-list>
-        <q-item clickable v-close-popup>
-          <q-item-section>
-            <q-item-label>Photos</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable v-close-popup>
-          <q-item-section>
-            <q-item-label>Articles</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-btn-dropdown>
+    <q-select v-model="language" :options="languages"></q-select>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import _ from 'lodash'
 export default {
-  name: 'LangManager'
+  name: 'LangManager',
+  beforeMount () {
+    this.language = _.find(this.languages, x => x.value === this.getLanguage)
+  },
+  watch: {
+    language (item) {
+      this.setLanguage([this.$i18n, item.value])
+    }
+  },
+  computed: {
+    ...mapGetters('lang', ['languages', 'getLanguage'])
+  },
+  methods: {
+    ...mapActions('lang', ['setLanguage'])
+  },
+  data () {
+    return {
+      language: null
+    }
+  }
 }
 </script>
 

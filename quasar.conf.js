@@ -44,7 +44,8 @@ module.exports = function (ctx) {
         'QAvatar',
         'QImg',
         'QFooter',
-        'QBtnDropdown'
+        'QBtnDropdown',
+        'QSelect'
       ],
 
       directives: [
