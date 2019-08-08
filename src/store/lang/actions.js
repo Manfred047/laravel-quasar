@@ -1,5 +1,5 @@
 import { Quasar } from 'quasar'
-import VeeValidate from 'vee-validate'
+import { Validator } from 'vee-validate'
 import moment from 'moment'
 // Lang for quasar
 const qLang = lang => {
@@ -58,10 +58,7 @@ export default {
         })
       await import(`vee-validate/dist/locale/${veeLang(lang)}`)
         .then(language => {
-          VeeValidate.configure({
-            locale: veeLang(lang),
-            dictionary: language
-          })
+          Validator.localize(veeLang(lang), language)
         })
       let localL = localLang(lang)
       await import(`../../i18n/${localL}/${localL}`)
