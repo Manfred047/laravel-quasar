@@ -6,6 +6,7 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
+      'veeValidate',
       'i18n',
       'axios'
     ],
@@ -45,7 +46,11 @@ module.exports = function (ctx) {
         'QImg',
         'QFooter',
         'QBtnDropdown',
-        'QSelect'
+        'QSelect',
+        'QForm',
+        'QInput',
+        'QCard',
+        'QCardSection'
       ],
 
       directives: [
@@ -56,7 +61,8 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify',
-        'Cookies'
+        'Cookies',
+        'Meta'
       ]
 
       // iconSet: 'ionicons-v4'
