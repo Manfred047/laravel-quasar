@@ -19,6 +19,9 @@ export default {
     AuthService.logout()
     commit('FORCE_LOGOUT', router)
   },
+  basicLogout ({ commit }, router) {
+    commit('FORCE_LOGOUT', router)
+  },
   storeAuthCookie ({ commit }, data) {
     commit('SET_AUTH_COOKIE', data)
   }

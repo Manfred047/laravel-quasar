@@ -1,4 +1,4 @@
 export default {
   is_auth: false,
-  user: {}
+  user_data: {}
 }

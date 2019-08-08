@@ -2,7 +2,7 @@ import _ from 'lodash'
 import { Notify } from 'quasar'
 
 const master = {
-  getCookieName () {
+  getAuthCookieName () {
     return process.env.AUTH_COOKIE_NAME
   },
   getLangCookieName () {

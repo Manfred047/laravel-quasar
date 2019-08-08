@@ -4,12 +4,12 @@ export default {
     return _.get(state, ['is_auth'], false)
   },
   username (state) {
-    return _.get(state, ['user', 'username'], '')
+    return _.get(state, ['user_data', 'username'], '')
   },
   email (state) {
-    return _.get(state, ['user', 'email'], '')
+    return _.get(state, ['user_data', 'email'], '')
   },
   userData (state) {
-    return _.get(state, ['user'], {})
+    return _.get(state, ['user_data'], {})
   }
 }

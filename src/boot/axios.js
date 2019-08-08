@@ -8,7 +8,7 @@ export default async ({ Vue, route, ssrContext }) => {
     ? Cookies.parseSSR(ssrContext)
     : Cookies
   // Global axios defaults
-  let token = cookies.get(master.getCookieName())
+  let token = cookies.get(master.getLangCookieName())
   axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
   if (!_.isEmpty(token)) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
