@@ -8,8 +8,14 @@
         <div class="col-12">
           Multimedia is copyrighted by
           <a class="text-cyan" href="https://www.facebook.com/Nyamuhh" target="_blank">
-            Nyami.
+            Nyami
           </a>
+          and
+          <a class="text-cyan" href="https://www.artstation.com/patrickfaulwetter" target="_blank">
+            Patrick Faulwetter
+          </a>
+        </div>
+        <div class="col-12">
           The official website for Manfred047 is
           <a class="text-cyan" href="https://Manfred047.com" target="_blank"> manfred047.com</a>
         </div>

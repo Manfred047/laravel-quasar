@@ -1,34 +1,30 @@
 <template>
-  <div class="q-pa-md">
-    <div class="flex-center q-pt-lg">
-      <div class="row">
-        <div class="col-lg-3 col-md-12"></div>
-        <div class="col-lg-6 col-md-12 width-100">
-          <q-card class="">
-            <q-card-section>
-              <div class="text-h-6 text-center q-pb-sm">
-                {{ $t('login.title') }}
-              </div>
-              <q-form @submit.prevent="validateForm">
-                <q-input
-                  id="username"
-                  name="username"
-                  type="email"
-                  :label="$t('login.form.username')"
-                  v-model="form.username"
-                  v-validate="form_rules.username"
-                  :data-vv-as="$t('login.form.username')"
-                  :error="errors.has('username')"
-                  :error-message="errors.first('username')">
-                </q-input>
-              </q-form>
-            </q-card-section>
-          </q-card>
-        </div>
-        <div class="col-lg-3 col-md-12"></div>
+  <q-page class="image-background">
+    <div class="">
+      <div class="fixed-center">
+        <q-card class="">
+          <q-card-section>
+            <div class="text-h-6 text-center q-pb-sm">
+              {{ $t('login.title') }}
+            </div>
+            <q-form @submit.prevent="validateForm">
+              <q-input
+                id="username"
+                name="username"
+                type="email"
+                :label="$t('login.form.username')"
+                v-model="form.username"
+                v-validate="form_rules.username"
+                :data-vv-as="$t('login.form.username')"
+                :error="errors.has('username')"
+                :error-message="errors.first('username')">
+              </q-input>
+            </q-form>
+          </q-card-section>
+        </q-card>
       </div>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
@@ -89,6 +85,9 @@ export default {
 </script>
 
 <style scoped>
+.image-background {
+  background-image: url("../../assets/custom/login-background.jpg");
+}
 .width-100 {
   width: 100%;
 }
