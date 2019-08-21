@@ -4,7 +4,7 @@ export const enLogin = {
   'success_login': 'Welcome',
   'success_logout': 'See you later',
   'form': {
-    'username': 'Username or Email',
+    'username': 'Email',
     'password': 'Password'
   },
   'forgot_password': 'forgot password?',

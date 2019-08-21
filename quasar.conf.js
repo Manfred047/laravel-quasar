@@ -50,7 +50,8 @@ module.exports = function (ctx) {
         'QForm',
         'QInput',
         'QCard',
-        'QCardSection'
+        'QCardSection',
+        'QSpinner'
       ],
 
       directives: [
