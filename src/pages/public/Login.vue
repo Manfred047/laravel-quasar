@@ -14,7 +14,7 @@
                 <q-input
                   id="username"
                   name="username"
-                  type="email"
+                  type="text"
                   :label="$t('login.form.username')"
                   v-model="form.username"
                   v-validate="form_rules.username"
@@ -58,8 +58,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { AuthService } from '../../services/AuthService'
+import { master } from '../../helpers/master'
+import _ from 'lodash'
 
 export default {
   name: 'Login',
@@ -78,6 +80,9 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters('auth', ['isAuth'])
+  },
   methods: {
     ...mapActions('auth', ['setAuthStatus', 'setUserData', 'storeAuthCookie']),
     validateForm () {
@@ -93,10 +98,21 @@ export default {
       this.loader = true
       AuthService.login(this.form)
         .then(response => {
-          //
+          this.storeAuthCookie(response)
+          this.setAuthStatus(true)
+          this.setUserData(_.get(response, ['data', 'user'], {}))
+          let redirect = _.get(this.$route, ['query', 'redirect'])
+          if (redirect) {
+            this.$router.replace({ name: 'index' })
+          } else {
+            this.$router.replace({ name: 'index' })
+          }
         })
         .catch(errors => {
-          //
+          let errArray = master.hasErrors(errors)
+          if (errArray) {
+            master.setErrors(this.errors, errArray)
+          }
         })
         .then(() => {
           this.loader = false
@@ -112,11 +128,18 @@ export default {
         grant_type: 'password'
       },
       form_rules: {
-        username: 'required|email|max:50',
+        username: 'required|max:50',
         password: 'required|min:8',
         grant_type: 'required'
       }
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.isAuth) {
+        vm.$router.replace({ name: 'index' })
+      }
+    })
   },
   meta () {
     return {
@@ -128,7 +151,7 @@ export default {
 
 <style type="text/stylus" scoped>
 .image-background {
-  background-image: url("../../assets/custom/login-background.jpg");
+  background-image: url('../../assets/custom/login-background.jpg');
 }
 .login-form {
   width: 350px;

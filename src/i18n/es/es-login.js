@@ -4,7 +4,7 @@ export const esLogin = {
   'success_login': 'Bienvenido',
   'success_logout': 'Hasta pronto',
   'form': {
-    'username': 'Correo electrónico',
+    'username': 'Usuario o correo electrónico',
     'password': 'Contraseña'
   },
   'forgot_password': '¿Perdiste tu contraseña?',
