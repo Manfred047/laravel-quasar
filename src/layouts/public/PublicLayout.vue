@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-btn flat round icon="home" :to="{name: 'public.index'}"></q-btn>
         <q-toolbar-title>
-          Laravel 5.8 with Quasar v{{$q.version}} (SPA) by Manfred047
+          Laravel 6.0 with Quasar v{{$q.version}} (SPA) by Manfred047
         </q-toolbar-title>
         <lang-manager></lang-manager>
         <template v-if="isAuth">

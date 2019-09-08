@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["2d21e569"],{d4ad:function(e,n,a){"use strict";a.r(n);var t=function(){var e=this,n=e.$createElement,a=e._self._c||n;return a("q-page",[a("div",[e._v("login")])])},c=[],i={name:"Login"},o=i,l=a("2877"),r=Object(l["a"])(o,t,c,!1,null,"ec16a5fc",null);n["default"]=r.exports}}]);
