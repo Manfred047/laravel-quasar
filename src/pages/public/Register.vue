@@ -129,7 +129,7 @@ export default {
             message: this.$t('register.success_register'),
             type: 'positive'
           })
-          this.$router.replace({ name: 'index' })
+          this.$router.replace({ name: 'public.index' })
         })
         .catch(errors => {
           let errArray = master.hasErrors(errors)

@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const AuthService = {
   register (form) {
-    return axios.post(master.api('oauth/register'), form)
+    return axios.post(master.api('register'), form)
   },
   login (form) {
     return axios.post(master.api('oauth/token'), form)

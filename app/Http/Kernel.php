@@ -40,6 +40,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            \App\Http\Middleware\VerifyAjaxRequest::class
         ],
     ];
 
@@ -60,6 +61,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'oauth.grant' => \App\Http\Middleware\VerifyGrantType::class,
+        'oauth.details' => \App\Http\Middleware\InjectGrantClientDetails::class,
+        'oauth.token' => \App\Http\Middleware\InjectAuthToken::class,
     ];
 
     /**
@@ -70,6 +74,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middlewarePriority = [
+        \App\Http\Middleware\InjectAuthToken::class, // important
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\Authenticate::class,

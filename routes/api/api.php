@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @copyright 2018 Manfred047
  * @author Emanuel Chablé Concepción <manfred@manfred047.com>

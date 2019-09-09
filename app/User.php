@@ -2,13 +2,15 @@
 
 namespace App;
 
+use App\Library\Master;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'username' ,'password',
     ];
 
     /**
@@ -34,6 +36,45 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'id' => 'integer',
+        'username' => 'string',
+        'email' => 'string',
+        'password' => 'string',
         'email_verified_at' => 'datetime',
     ];
+
+    // METHODS
+
+    public function findForPassport($identifier) {
+        return $this->where('email', $identifier)
+            ->orWhere('username', $identifier)
+            ->first();
+    }
+
+    // SETTERS
+
+    public function setUserNameAttribute($username)
+    {
+        $this->attributes['username'] = Master::trimmed($username, true);
+    }
+
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = mb_strtolower($email, 'UTF-8');
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    // RULES
+    public static function registerRules()
+    {
+        return [
+            'email' => 'required|string|email|max:50|confirmed|unique:users',
+            'username' => 'required|string|alpha_num|max:50|unique:users',
+            'password' => 'required|string|confirmed|min:8|regex:/(^[\S]{8,}$)/'
+        ];
+    }
 }
