@@ -5,6 +5,9 @@ const master = {
   getAuthTokenName () {
     return process.env.AUTH_TOKEN_NAME
   },
+  getStorageUserDataName () {
+    return 'user_data'
+  },
   getLangCookieName () {
     return process.env.LANG_COOKIE_NAME
   },

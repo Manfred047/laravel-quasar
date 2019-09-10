@@ -12,7 +12,7 @@ const AuthService = {
     return axios.post(master.api('oauth/logout'))
   },
   getAuthUser () {
-    return axios.get(master.api('user'))
+    return axios.get(master.api('oauth/user'))
   }
 }
 

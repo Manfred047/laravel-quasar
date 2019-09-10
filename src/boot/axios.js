@@ -10,7 +10,7 @@ export default async ({ Vue, app, ssrContext, store, router }) => {
   // Global axios defaults
   let token = LocalStorage.getItem(master.getAuthTokenName())
   axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-  axios.defaults.headers.common['lang'] = cookies.get(master.getLangCookieName())
+  axios.defaults.headers.common['Accept-Language'] = cookies.get(master.getLangCookieName())
   if (!_.isEmpty(token)) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   }
@@ -36,35 +36,35 @@ export default async ({ Vue, app, ssrContext, store, router }) => {
         case 404:
           Notify.create({
             message: app.i18n.t('error.e404'),
-            type: 'negative'
+            color: 'red'
           })
           break
 
         case 405:
           Notify.create({
             message: app.i18n.t('error.e405'),
-            type: 'negative'
+            color: 'red'
           })
           break
 
         case 403:
           Notify.create({
             message: app.i18n.t('error.e403'),
-            type: 'negative'
+            color: 'red'
           })
           break
 
         case 419:
           Notify.create({
             message: app.i18n.t('error.e419'),
-            type: 'negative'
+            color: 'red'
           })
           break
 
         case 500:
           Notify.create({
             message: app.i18n.t('error.e500'),
-            type: 'negative'
+            color: 'red'
           })
           break
 
@@ -72,7 +72,7 @@ export default async ({ Vue, app, ssrContext, store, router }) => {
           if (_.get(error, ['response', 'data', 'message'], '') === 'Unauthenticated.') {
             Notify.create({
               message: app.i18n.t('error.eSessionExpired'),
-              type: 'warning'
+              color: 'yellow'
             })
             store.dispatch('auth/basicLogout', router)
           }
@@ -81,14 +81,14 @@ export default async ({ Vue, app, ssrContext, store, router }) => {
         default:
           Notify.create({
             message: app.i18n.t('error.eUnexpected'),
-            type: 'negative'
+            color: 'red'
           })
           break
       }
     } else {
       Notify.create({
         message: app.i18n.t('error.eUnexpected'),
-        type: 'negative'
+        color: 'red'
       })
     }
     // Do something with response error

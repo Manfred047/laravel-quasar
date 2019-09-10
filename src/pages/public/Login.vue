@@ -105,7 +105,7 @@ export default {
           if (redirect) {
             this.$router.replace(redirect)
           } else {
-            this.$router.replace({ name: 'public.index' })
+            this.$router.replace({ name: 'auth.user' })
           }
         })
         .catch(errors => {

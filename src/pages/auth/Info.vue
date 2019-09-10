@@ -4,11 +4,17 @@
   </q-page>
 </template>
 
-<style>
-</style>
-
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'info',
+  meta () {
+    return {
+      title: this.$t('page_titles.info_title')
+    }
+  }
 }
 </script>
+
+<style scoped>
+
+</style>

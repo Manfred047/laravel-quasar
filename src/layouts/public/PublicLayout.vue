@@ -8,11 +8,11 @@
         </q-toolbar-title>
         <lang-manager></lang-manager>
         <template v-if="isAuth">
-          <q-btn flat color="primary" label="User"></q-btn>
+          <q-btn flat :label="$t('page_titles.user_title')" :to="{name: 'auth.user'}"></q-btn>
         </template>
         <template v-else>
-          <q-btn flat :to="{name: 'public.login'}" label="Login"></q-btn>
-          <q-btn flat :to="{name: 'public.register'}" label="Register"></q-btn>
+          <q-btn flat :to="{name: 'public.login'}" :label="$t('login.title')"></q-btn>
+          <q-btn flat :to="{name: 'public.register'}" :label="$t('register.title')"></q-btn>
         </template>
       </q-toolbar>
     </q-header>
