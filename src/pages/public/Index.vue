@@ -9,6 +9,11 @@
 
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  meta () {
+    return {
+      title: this.$t('page_titles.home_title')
+    }
+  }
 }
 </script>

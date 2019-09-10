@@ -69,7 +69,8 @@ export default async ({ Vue, app, ssrContext, store, router }) => {
           break
 
         case 401:
-          if (_.get(error, ['response', 'data', 'message'], '') === 'Unauthenticated.') {
+          let message = _.get(error, ['response', 'data', 'message'], '')
+          if (message === 'Unauthenticated') {
             Notify.create({
               message: app.i18n.t('error.eSessionExpired'),
               color: 'yellow'
