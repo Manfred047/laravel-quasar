@@ -3,37 +3,50 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Resources\User\UserResource;
+use App\Library\Master;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Laravel\Passport\Http\Controllers\AccessTokenController;
+use Psr\Http\Message\ServerRequestInterface;
 
-class LoginController extends Controller
+class LoginController extends AccessTokenController
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function login(Request $request, ServerRequestInterface $server)
     {
-        $this->middleware('guest')->except('logout');
+        validator($request->all(), User::loginRules())
+            ->validate();
+        $tokenResponse = parent::issueToken($server);
+        $content = $tokenResponse->getContent();
+        $data = json_decode($content, true);
+        if(isset($data["error"])) {
+            return response()->json([
+                'error' => 'invalid_credentials',
+                'message' => 'The user credentials were incorrect.',
+                'errors' => [
+                    'username' => ['Incorrect username or password'],
+                    'password' => ['Incorrect username or password']
+                ]
+            ], 401);
+        }
+        if (isset($data['access_token'])) {
+            $user = new User();
+            $data['user_data'] = UserResource::make($user->findForPassport($request->input('username')));
+            return $tokenResponse->setContent($data)
+                ->cookie(Master::getPassportCookieName(), $data['access_token'], $data['expires_in'] / 60);
+        }
+        return $tokenResponse;
+    }
+
+    public function logout(Request $request)
+    {
+        $accessToken = $request->user()->token();
+        DB::table('oauth_refresh_tokens')
+            ->where('access_token_id', $accessToken->id)
+            ->delete();
+        $accessToken->delete();
+        cookie()->forget(Master::getPassportCookieName());
+        return Master::successResponse();
     }
 }

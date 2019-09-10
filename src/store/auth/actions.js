@@ -8,6 +8,9 @@ export default {
   setUserData ({ commit }, data) {
     commit('SET_USER_DATA', data)
   },
+  storeToken ({ commit }, response) {
+    commit('STORE_TOKEN', response)
+  },
   getUserData ({ commit }) {
     return AuthService.getAuthUser()
       .then(response => {
@@ -21,8 +24,5 @@ export default {
   },
   basicLogout ({ commit }, router) {
     commit('FORCE_LOGOUT', router)
-  },
-  storeAuthCookie ({ commit }, data) {
-    commit('SET_AUTH_COOKIE', data)
   }
 }

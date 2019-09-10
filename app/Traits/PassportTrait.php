@@ -18,6 +18,11 @@ trait PassportTrait
             ->diffInMinutes();
     }
 
+    public static function getPassportCookieName()
+    {
+        return env('AUTH_COOKIE_NAME', 'lq-oauth');
+    }
+
     public static function PassportTokenLifetime()
     {
         return now()

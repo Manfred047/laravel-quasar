@@ -27,3 +27,11 @@ Route::get('/', function () {
         'github' => 'https://github.com/Manfred047'
     ]);
 });
+
+Route::name('api.')
+    ->prefix('/v1')
+    ->middleware(['oauth.token', 'auth:api'])
+    ->group(function () {
+        Route::apiResource('/oauth/user', 'Auth\AuthController')
+            ->only('index');
+    });

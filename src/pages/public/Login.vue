@@ -84,7 +84,7 @@ export default {
     ...mapGetters('auth', ['isAuth'])
   },
   methods: {
-    ...mapActions('auth', ['setAuthStatus', 'setUserData', 'storeAuthCookie']),
+    ...mapActions('auth', ['setAuthStatus', 'setUserData', 'storeToken']),
     validateForm () {
       this.$validator.validateAll()
         .then((result) => {
@@ -98,14 +98,14 @@ export default {
       this.loader = true
       AuthService.login(this.form)
         .then(response => {
-          this.storeAuthCookie(response)
+          this.storeToken(response)
           this.setAuthStatus(true)
-          this.setUserData(_.get(response, ['data', 'user'], {}))
+          this.setUserData(_.get(response, ['data', 'user_data'], {}))
           let redirect = _.get(this.$route, ['query', 'redirect'])
           if (redirect) {
-            this.$router.replace({ name: 'index' })
+            this.$router.replace(redirect)
           } else {
-            this.$router.replace({ name: 'index' })
+            this.$router.replace({ name: 'public.index' })
           }
         })
         .catch(errors => {
@@ -137,7 +137,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(vm => {
       if (vm.isAuth) {
-        vm.$router.replace({ name: 'index' })
+        vm.$router.replace({ name: 'public.index' })
       }
     })
   },

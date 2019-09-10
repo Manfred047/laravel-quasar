@@ -2,8 +2,8 @@ import _ from 'lodash'
 import { Notify } from 'quasar'
 
 const master = {
-  getAuthCookieName () {
-    return process.env.AUTH_COOKIE_NAME
+  getAuthTokenName () {
+    return process.env.AUTH_TOKEN_NAME
   },
   getLangCookieName () {
     return process.env.LANG_COOKIE_NAME
@@ -28,6 +28,14 @@ const master = {
     let status = _.get(errors, ['response', 'status'])
     if (status === 422) {
       return _.get(errors, ['response', 'data', 'errors'], false)
+    } else if (status === 401) {
+      let message = _.get(errors, ['response', 'data', 'error'])
+      if (message === 'invalid_credentials') {
+        return {
+          'type': 'auth',
+          'errors': _.get(errors, ['response', 'data', 'errors'], false)
+        }
+      }
     }
     return false
   },
@@ -38,12 +46,16 @@ const master = {
      * @param {object} errors - lista de errores (parseada por hasErrors) del servidor
      */
   setErrors (elErrors, errors) {
+    let isAuth = _.get(errors, ['type']) === 'auth'
+    if (isAuth) {
+      errors = _.get(errors, ['errors'], [])
+    }
     for (const key of Object.keys(errors)) {
       if (errors.hasOwnProperty(key)) {
         elErrors.add({
           field: key,
           msg: errors[key][0],
-          rule: key
+          rule: ((isAuth) ? 'auth' : key)
         })
       }
     }

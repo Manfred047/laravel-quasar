@@ -5,5 +5,6 @@ export const enErrors = {
   'e419': 'Invalid token',
   'e500': 'Internal Server Error',
   'e401': 'Unauthorized',
+  'eSessionExpired': 'Your session has expired',
   'eUnexpected': 'An unexpected error occurred'
 }

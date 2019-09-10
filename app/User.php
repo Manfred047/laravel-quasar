@@ -45,9 +45,9 @@ class User extends Authenticatable
 
     // METHODS
 
-    public function findForPassport($identifier) {
-        return $this->where('email', $identifier)
-            ->orWhere('username', $identifier)
+    public function findForPassport($username) {
+        return $this->where('email', $username)
+            ->orWhere('username', $username)
             ->first();
     }
 
@@ -75,6 +75,15 @@ class User extends Authenticatable
             'email' => 'required|string|email|max:50|confirmed|unique:users',
             'username' => 'required|string|alpha_num|max:50|unique:users',
             'password' => 'required|string|confirmed|min:8|regex:/(^[\S]{8,}$)/'
+        ];
+    }
+
+    public static function loginRules()
+    {
+        return [
+            'username' => 'required|string|max:50',
+            'password' => 'required|string|min:8',
+            'grant_type' => 'required|string|in:password'
         ];
     }
 }

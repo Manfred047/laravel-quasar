@@ -168,7 +168,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(vm => {
       if (vm.isAuth) {
-        vm.$router.replace({ name: 'index' })
+        vm.$router.replace({ name: 'public.index' })
       }
     })
   },

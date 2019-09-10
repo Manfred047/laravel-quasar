@@ -9,6 +9,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Library\Master;
 use Closure;
 
 class InjectAuthToken
@@ -22,10 +23,10 @@ class InjectAuthToken
      */
     public function handle($request, Closure $next)
     {
-        if ($request->hasCookie(env('AUTH_COOKIE_NAME')) && !$request->hasHeader('Bearer')) {
+        if ($request->hasCookie(Master::getPassportCookieName()) && !$request->hasHeader('Bearer')) {
             $request->instance()
                 ->headers
-                ->set('Authorization', "Bearer {$request->cookie(env('AUTH_COOKIE_NAME'))}");
+                ->set('Authorization', "Bearer {$request->cookie(Master::getPassportCookieName())}");
         }
         return $next($request);
     }

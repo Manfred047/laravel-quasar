@@ -5,5 +5,6 @@ export const esErrors = {
   'e419': 'Token no válido',
   'e500': 'Error de servidor',
   'e401': 'No autorizado',
+  'eSessionExpired': 'Tu sesión ha expirado',
   'eUnexpected': 'Ocurrio un error inesperado'
 }
