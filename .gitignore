@@ -33,5 +33,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-.env.development
-.env.production
+.env.quasar.development
+.env.quasar.production

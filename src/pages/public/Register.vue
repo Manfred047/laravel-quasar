@@ -129,7 +129,7 @@ export default {
             message: this.$t('register.success_register'),
             type: 'positive'
           })
-          this.$router.replace({ name: 'public.index' })
+          this.$router.replace({ name: 'public.login' })
         })
         .catch(errors => {
           let errArray = master.hasErrors(errors)
@@ -174,7 +174,7 @@ export default {
   },
   meta () {
     return {
-      title: this.$t('register.title')
+      title: this.$t('page_titles.register_title')
     }
   }
 }
@@ -182,7 +182,7 @@ export default {
 
 <style scoped>
   .image-background {
-    background-image: url('../../assets/custom/login-background.jpg');
+    background-image: url('../../assets/custom/register-background.jpg');
   }
   .register-form {
     width: 350px;

@@ -30,10 +30,10 @@ Route::name('api.auth.')
             ->only('store');
 
         Route::post('/oauth/logout', 'LoginController@logout')
-            ->middleware(['oauth.token', 'auth:api'])
+            ->middleware(['auth:api'])
             ->name('logout');
 
         Route::apiResource('/oauth/change-password', 'ChangePasswordController')
-            ->middleware(['oauth.token', 'auth:api', 'can:update,password'])
+            ->middleware(['auth:api'])
             ->only('store');
     });

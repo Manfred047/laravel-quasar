@@ -143,7 +143,7 @@ export default {
   },
   meta () {
     return {
-      title: this.$t('login.title')
+      title: this.$t('page_titles.login_title')
     }
   }
 }

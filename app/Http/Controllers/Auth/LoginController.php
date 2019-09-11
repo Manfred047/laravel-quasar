@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Http\Resources\User\UserResource;
 use App\Library\Master;
 use App\User;
@@ -33,8 +32,7 @@ class LoginController extends AccessTokenController
         if (isset($data['access_token'])) {
             $user = new User();
             $data['user_data'] = UserResource::make($user->findForPassport($request->input('username')));
-            return $tokenResponse->setContent($data)
-                ->cookie(Master::getPassportCookieName(), $data['access_token'], $data['expires_in'] / 60);
+            return $tokenResponse->setContent($data);
         }
         return $tokenResponse;
     }
@@ -46,7 +44,6 @@ class LoginController extends AccessTokenController
             ->where('access_token_id', $accessToken->id)
             ->delete();
         $accessToken->delete();
-        cookie()->forget(Master::getPassportCookieName());
         return Master::successResponse();
     }
 }

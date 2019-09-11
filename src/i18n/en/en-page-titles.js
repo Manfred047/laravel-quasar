@@ -1,4 +1,6 @@
 export const enPageTitles = {
+  'login_title': 'Login',
+  'register_title': 'Register',
   'home_title': 'Dashboard',
   'user_title': 'User',
   'info_title': 'Information',

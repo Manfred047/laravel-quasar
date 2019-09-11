@@ -30,7 +30,7 @@ Route::get('/', function () {
 
 Route::name('api.')
     ->prefix('/v1')
-    ->middleware(['oauth.token', 'auth:api'])
+    ->middleware(['auth:api'])
     ->group(function () {
         Route::apiResource('/oauth/user', 'Auth\AuthController')
             ->only('index');

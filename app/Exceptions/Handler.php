@@ -81,7 +81,6 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        cookie()->forget(env('AUTH_COOKIE_NAME'));
         return response()->json([
             'error' => 'unauthenticated',
             'message' => 'Unauthenticated',
