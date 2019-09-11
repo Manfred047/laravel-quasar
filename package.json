@@ -46,7 +46,7 @@
         "q-ssr-build": "quasar build -m ssr",
         "q-ssr-dev": "quasar dev -m ssr",
         "q-spa-build": "quasar build",
-        "q-spa-dev": "quasar dev -H lq.lol"
+        "q-spa-dev": "quasar dev -H lq.test"
     },
     "devDependencies": {
         "@quasar/app": "^1.0.6",
