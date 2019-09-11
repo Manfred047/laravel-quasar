@@ -11,9 +11,10 @@ En el directorio raiz, ejecuta los siguientes comandos:
 3. cp .env.example .env
 4. cp .env.quasar.development.example .env.quasar.development
 5. cp .env.quasar.development.example .env.quasar.production
-6. php artisan key:generate
-7. php artisan migrate
-8. php artisan passport:install
+6. Crear base de datos y configurarlo en el archivo `.env`
+7. php artisan key:generate
+8. php artisan migrate
+9. php artisan passport:install
 
 Copia los tokens generados (Password grant client) y agrega/actualiza las siguientes llaves en tu archivo .env:\
  `PASSWORD_GRANT_CLIENT_ID` \
