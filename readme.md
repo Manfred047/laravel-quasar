@@ -81,7 +81,7 @@ En esta actualización se trabaja con el CLI de Quasar, por lo cual se requiere 
  + Se conserva la estructura para el CLI, las carpetas estan en la raiz con los siguientes nombres:
  `src` y `src-ssr`
  
- # Lravel
+ # Laravel
  
 #### Libreria Maestra para Laravel
 ##### Esta es una libreria de tipo Singleton static class
