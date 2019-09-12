@@ -1,12 +1,4 @@
 const mix = require('laravel-mix');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const map = require('./storage/json/dir-script-map');
-
-const dir = ((mix.inProduction()) ? map.prod : map.dev);
-
-if (mix.inProduction()) {
-    mix.version();
-}
 
 /*
  |--------------------------------------------------------------------------
@@ -19,23 +11,5 @@ if (mix.inProduction()) {
  |
  */
 
-mix.babel([
-    'resources/js/plugins/secure.js'
-], dir.js.secure);
-
-mix.js('resources/js/bootstrap.js', dir.js.bootstrap);
-mix.js('resources/js/app.js', dir.js.app);
-mix.stylus('resources/stylus/main.styl', dir.css.main);
-mix.sass('resources/sass/app.scss', dir.css.app);
-
-mix.copyDirectory('resources/template/img', 'public/img');
-
-mix.webpackConfig({
-    output: {
-        publicPath: '/',
-        chunkFilename: dir.chunks
-    },
-    plugins: [
-        new CleanWebpackPlugin([dir.clean])
-    ]
-});
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css');

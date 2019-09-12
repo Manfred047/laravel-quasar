@@ -11,23 +11,66 @@ namespace App\Traits;
 
 trait ResponseTrait
 {
-
-    public static function success()
+    /**
+     * Retorna una respuesta de datos correctos
+     *
+     * @param array $data
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public static function successResponse($data = [])
     {
         return response()->json([
-            'message' => 'success'
+            'error' => '',
+            'code' => 200,
+            'hint' => 'success',
+            'message' => "success",
+            'data' => $data
         ]);
     }
 
-    public static function error($module = '', $error = 'create', $code = 409)
+    /**
+     * retorna un error estandarizado
+     *
+     * @param string $module - Nombre del modulo
+     * @param string $error - Tipo de error "create|update|delete|''"
+     * @param string $hint - Mensaje para developer
+     * @param int $code - Codigo de error (basado en codigos de servidor)
+     * @param array $data - Datos extras para elerror
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public static function errorResponse($module = '', $error = 'create', $hint = '', $code = 409, $data = [])
     {
         return response()->json([
+            'error' => self::errorType($error),
+            'code' => $code,
+            'hint' => $hint,
             'message' => "Can't {$error} {$module}",
-            'error' => self::errorType($error)
+            'data' => $data
         ], $code);
     }
 
-    public static function errorType($error)
+    /**
+     * retorna error estandarizado, especial para los exceptions
+     *
+     * @param $exception
+     * @param string $module
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public static function exceptionResponse(\Exception $exception, $module = '')
+    {
+        return response()->json([
+            'error' => 'exception',
+            'code' => $exception->getCode(),
+            'hint' => 'exception',
+            'message' => "Exception in module: {$module}",
+            'data' => [
+                'message' => $exception->getMessage(),
+                'details' => $exception->getTraceAsString()
+            ]
+        ], 500);
+    }
+
+    private static function errorType($error)
     {
         switch ($error) {
             case 'create':
@@ -37,7 +80,7 @@ trait ResponseTrait
             case 'delete':
                 return 'not_be_deleted';
             default:
-                return 'Unknown';
+                return ((empty($error)) ? 'Unknown' :  $error);
         }
     }
 }

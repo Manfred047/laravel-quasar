@@ -10,7 +10,6 @@
 /**
  * Auth routes
  * @todo Auth Routes
- * Aqui se encuentran las rutas para login, cierre de sesion, registro y recovery (password)
  */
 Route::name('api.auth.')
     ->prefix('/v1')
@@ -18,27 +17,23 @@ Route::name('api.auth.')
     ->group(function () {
 
         Route::post('/oauth/token', 'LoginController@login')
-            ->middleware(['client.grants:password', 'client.details'])
+            ->middleware(['oauth.grant:password', 'oauth.details'])
             ->name('login');
-
-        Route::get('/oauth/check', 'LoginController@check')
-            ->middleware('client.oauth')
-            ->name('check');
 
         Route::apiResource('/recovery', 'ForgotPasswordController')
             ->only('store');
 
-        // Update password (by recovery).
-        Route::apiResource('/new-password', 'ResetPasswordController')
+        Route::apiResource('/reset-password', 'ResetPasswordController')
             ->only('store');
 
-        // New user (by register)
         Route::apiResource('/register', 'RegisterController')
             ->only('store');
 
-        // Cerrar sesion
         Route::post('/oauth/logout', 'LoginController@logout')
-            ->middleware(['client.oauth', 'auth:api'])
+            ->middleware(['auth:api'])
             ->name('logout');
 
+        Route::apiResource('/oauth/change-password', 'ChangePasswordController')
+            ->middleware(['auth:api'])
+            ->only('store');
     });

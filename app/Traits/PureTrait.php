@@ -44,5 +44,4 @@ trait PureTrait
         }
         return (($save) ? null : '');
     }
-
 }

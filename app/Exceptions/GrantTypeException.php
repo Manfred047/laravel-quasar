@@ -33,8 +33,9 @@ class GrantTypeException extends Exception
     {
         return response()->json([
             'error' => 'unsupported_grant',
+            'code' => 400,
             'hint' => 'Check the grant type',
-            'message' => "{$request->grant_type} grant is not supported."
+            'message' => "{$request->input('grant_type')} grant is not supported.",
         ], 400);
     }
 }

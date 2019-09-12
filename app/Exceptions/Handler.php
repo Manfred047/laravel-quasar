@@ -1,11 +1,4 @@
 <?php
-/**
- * @copyright 2018 Manfred047
- * @author Emanuel Chablé Concepción <manfred@manfred047.com>
- * @version 1.0.0
- * @website: https://manfred047.com
- * @github https://github.com/Manfred047
- */
 
 namespace App\Exceptions;
 
@@ -14,6 +7,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -39,7 +33,7 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception $exception
+     * @param \Exception $exception
      * @return void
      * @throws Exception
      */
@@ -59,15 +53,21 @@ class Handler extends ExceptionHandler
     {
         switch (true) {
             case $exception instanceof TokenMismatchException:
-                return response()->json([
-                    'error' => 'authentication_timeout',
-                    'message' => 'Authentication Timeout'
-                ], 419);
-            case $exception instanceOf ModelNotFoundException:
-                return response()->json([
-                    'error' => 'not_found',
-                    'message' => 'Not Found'
-                ], 404);
+                if ($request->ajax()) {
+                    return response()->json([
+                        'error' => 'authentication_timeout',
+                        'message' => 'Authentication Timeout'
+                    ], 419);
+                }
+                break;
+            case $exception instanceof NotFoundHttpException:
+                if ($request->ajax()) {
+                    return response()->json([
+                        'error' => 'not_found',
+                        'message' => 'Resource not found'
+                    ], 419);
+                }
+                break;
         }
         return parent::render($request, $exception);
     }
@@ -81,11 +81,9 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        cookie()->forget('oauth');
         return response()->json([
             'error' => 'unauthenticated',
             'message' => 'Unauthenticated',
         ], 401);
     }
-
 }

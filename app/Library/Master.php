@@ -9,21 +9,17 @@
 
 namespace App\Library;
 
-use App\Traits\DirScriptMapTrait;
-use App\Traits\LoginTrait;
+use App\Traits\PassportTrait;
 use App\Traits\PureTrait;
 use App\Traits\RequestTrait;
 use App\Traits\ResponseTrait;
-use App\Traits\SecureTrait;
 
 class Master
 {
-    use PureTrait,
+    use PassportTrait,
+        PureTrait,
         RequestTrait,
-        ResponseTrait,
-        LoginTrait,
-        DirScriptMapTrait,
-        SecureTrait;
+        ResponseTrait;
 
     protected static $_instance = null;
 
@@ -50,4 +46,8 @@ class Master
         return static::$_instance;
     }
 
+    public static function hasDebug()
+    {
+        return env('APP_DEBUG', false);
+    }
 }
