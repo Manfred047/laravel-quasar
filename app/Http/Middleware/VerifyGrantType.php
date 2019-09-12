@@ -19,15 +19,15 @@ class VerifyGrantType
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
+     * @param $grants
      * @return mixed
      * @throws \Throwable
      */
     public function handle($request, Closure $next, $grants)
     {
         $acceptedGrants = explode('|', $grants);
-
         // Lets verify we can only access this when the grant_type is accepted
-        throw_if(!in_array($request->get('grant_type'), $acceptedGrants), GrantTypeException::class);
+        throw_if(!in_array($request->input('grant_type'), $acceptedGrants), GrantTypeException::class);
         return $next($request);
     }
 }

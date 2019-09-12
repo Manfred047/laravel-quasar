@@ -30,10 +30,8 @@ Route::get('/', function () {
 
 Route::name('api.')
     ->prefix('/v1')
-    ->middleware(['client.oauth', 'auth:api'])
+    ->middleware(['auth:api'])
     ->group(function () {
-
-        Route::apiResource('user', 'UserController')
+        Route::apiResource('/oauth/user', 'Auth\AuthController')
             ->only('index');
-
     });
