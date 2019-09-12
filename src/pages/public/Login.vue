@@ -4,52 +4,65 @@
       <div class="">
         <q-card class="">
           <q-card-section>
-            <q-form @submit.prevent="validateForm">
-              <div class="">
-                <p class="text-h6 text-center q-pb-sm">
-                  {{ $t('login.title') }}
-                </p>
-              </div>
-              <div class="">
-                <q-input
-                  id="username"
-                  name="username"
-                  type="text"
-                  :label="$t('login.form.username')"
-                  v-model="form.username"
-                  v-validate="form_rules.username"
-                  :data-vv-as="$t('login.form.username')"
-                  :error="errors.has('username')"
-                  :error-message="errors.first('username')">
-                </q-input>
-              </div>
-              <div class="">
-                <q-input
-                  id="password"
-                  name="password"
-                  type="password"
-                  :label="$t('login.form.password')"
-                  v-model="form.password"
-                  v-validate="form_rules.password"
-                  :data-vv-as="$t('login.form.password')"
-                  :error="errors.has('password')"
-                  :error-message="errors.first('password')">
-                </q-input>
-              </div>
-              <div class="text-center">
-                <q-btn
-                  type="submit"
-                  :loading="loader"
-                  :disable="errors.any()"
-                  :label="$t('login.title')"
-                  class="q-mt-md"
-                  color="teal">
-                  <template v-slot:loading>
-                    <q-spinner></q-spinner>
-                  </template>
-                </q-btn>
-              </div>
-            </q-form>
+            <validation-observer ref="observer" v-slot="{ valid }">
+              <q-form>
+                <div class="">
+                  <p class="text-h6 text-center q-pb-sm">
+                    {{ $t('login.title') }}
+                  </p>
+                </div>
+                <validation-provider
+                  vid="username"
+                  ref="username"
+                  :name="$t('login.form.username')"
+                  :rules="form_rules.username"
+                  v-slot="{ errors }">
+                  <div class="">
+                    <q-input
+                      id="username"
+                      name="username"
+                      type="text"
+                      :label="$t('login.form.username')"
+                      v-model="form.username"
+                      :error="hasErrors(errors)"
+                      :error-message="errors[0]">
+                    </q-input>
+                  </div>
+                </validation-provider>
+                <validation-provider
+                  vid="password"
+                  ref="password"
+                  :name="$t('login.form.password')"
+                  :rules="form_rules.password"
+                  v-slot="{ errors }">
+                  <div class="">
+                    <q-input
+                      id="password"
+                      name="password"
+                      type="password"
+                      :label="$t('login.form.password')"
+                      v-model="form.password"
+                      :error="hasErrors(errors)"
+                      :error-message="errors[0]">
+                    </q-input>
+                  </div>
+                </validation-provider>
+                <div class="text-center">
+                  <q-btn
+                    type="submit"
+                    :loading="loader"
+                    :disable="!valid"
+                    :label="$t('login.title')"
+                    class="q-mt-md"
+                    color="teal"
+                    @click="submit">
+                    <template v-slot:loading>
+                      <q-spinner></q-spinner>
+                    </template>
+                  </q-btn>
+                </div>
+              </q-form>
+            </validation-observer>
           </q-card-section>
         </q-card>
       </div>
@@ -62,21 +75,26 @@ import { mapActions, mapGetters } from 'vuex'
 import { AuthService } from '../../services/AuthService'
 import { master } from '../../helpers/master'
 import _ from 'lodash'
+import { ValidationObserver } from 'vee-validate'
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 
 export default {
   name: 'Login',
-  $_veeValidate: {
-    validator: 'new'
+  components: {
+    ValidationObserver,
+    ValidationProvider
   },
   watch: {
     'form.username' (val) {
-      if (this.errors.firstByRule('password', 'auth')) {
-        this.errors.remove('password')
+      if (this.$refs.observer.$data.isAuth) {
+        this.$refs.observer.$data.isAuth = false
+        this.$refs.password.reset()
       }
     },
     'form.password' (val) {
-      if (this.errors.firstByRule('username', 'auth')) {
-        this.errors.remove('username')
+      if (this.$refs.observer.$data.isAuth) {
+        this.$refs.observer.$data.isAuth = false
+        this.$refs.username.reset()
       }
     }
   },
@@ -85,14 +103,15 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setAuthStatus', 'setUserData', 'storeToken']),
-    validateForm () {
-      this.$validator.validateAll()
-        .then((result) => {
-          if (result) {
-            this.login()
-            return false
-          }
-        })
+    async submit () {
+      const isValid = await this.$refs.observer.validate()
+      if (!isValid) {
+        return false
+      }
+      this.login()
+    },
+    hasErrors (errors) {
+      return !_.isEmpty(errors)
     },
     login () {
       this.loader = true
@@ -111,7 +130,7 @@ export default {
         .catch(errors => {
           let errArray = master.hasErrors(errors)
           if (errArray) {
-            master.setErrors(this.errors, errArray)
+            master.setErrors(this.$refs.observer, errArray)
           }
         })
         .then(() => {

@@ -42,26 +42,29 @@ const master = {
     }
     return false
   },
+  hasRule (element, rule) {
+    let ruler = _.get(element, ['failedRules', rule])
+    return !_.isEmpty(ruler)
+  },
   /**
      * Toma la lista errores emitida por el server (o custom) y la anexa a los errores de VeeValidate
      *
-     * @param {object} elErrors - this.errros de veevalidate
+     * @param {object} observer - observer de veevalidate
      * @param {object} errors - lista de errores (parseada por hasErrors) del servidor
      */
-  setErrors (elErrors, errors) {
+  setErrors (observer, errors) {
     let isAuth = _.get(errors, ['type']) === 'auth'
     if (isAuth) {
+      observer.$data.isAuth = true
       errors = _.get(errors, ['errors'], [])
     }
+    let aux = {}
     for (const key of Object.keys(errors)) {
       if (errors.hasOwnProperty(key)) {
-        elErrors.add({
-          field: key,
-          msg: errors[key][0],
-          rule: ((isAuth) ? 'auth' : key)
-        })
+        aux[key] = errors[key]
       }
     }
+    observer.setErrors(aux)
   },
   onlyNumbers (evt) {
     evt = evt || window.event
