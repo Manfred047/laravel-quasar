@@ -5,7 +5,7 @@
 
 ## Versiones
 * Laravel 6.0
-* Quasar 1.1.0
+* Quasar 1.5.9
 
 ## Comandos
 En el directorio raiz, ejecuta los siguientes comandos:
