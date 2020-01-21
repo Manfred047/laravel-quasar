@@ -11,7 +11,7 @@ module.exports = {
   },
 
   extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
+    // https://eslint.vuejs.org/rules/#priority-a-essential-error-prevention
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
     'plugin:vue/essential',
     '@vue/standard'
@@ -26,7 +26,9 @@ module.exports = {
     'ga': true, // Google Analytics
     'cordova': true,
     '__statics': true,
-    'process': true
+    'process': true,
+    'Capacitor': true,
+    'chrome': true
   },
 
   // add your custom rules here
@@ -47,8 +49,6 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'prefer-promise-reject-errors': 'off',
 
-    // allow console.log during development only
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
