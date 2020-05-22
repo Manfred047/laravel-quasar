@@ -22,7 +22,7 @@ class InjectGrantClientDetails
      */
     public function handle($request, Closure $next)
     {
-        with(\Dotenv\Dotenv::create(base_path(),".env"))->load();
+        with(\Dotenv\Dotenv::createMutable(base_path(),".env"))->load();
         $request->request->add([
             'client_id' => env('PASSWORD_GRANT_CLIENT_ID', ''),
             'client_secret' => env('PASSWORD_GRANT_CLIENT_SECRET', '')
