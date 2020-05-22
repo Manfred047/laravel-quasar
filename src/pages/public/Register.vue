@@ -121,8 +121,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { AuthService } from 'src/services/AuthService'
-import { master } from 'src/helpers/master'
+import { AuthService } from '../../services/AuthService'
+import { master } from '../../helpers/master'
 import { ValidationObserver } from 'vee-validate'
 import { ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 import _ from 'lodash'

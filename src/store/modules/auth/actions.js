@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { AuthService } from 'src/services/AuthService'
+import { AuthService } from '../../../services/AuthService'
 
 export default {
   setAuthStatus ({ commit }, auth) {

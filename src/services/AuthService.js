@@ -1,4 +1,4 @@
-import { master } from 'src/helpers/master'
+import { master } from '../helpers/master'
 import axios from 'axios'
 
 const AuthService = {

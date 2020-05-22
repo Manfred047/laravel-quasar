@@ -1,5 +1,5 @@
 import { LocalStorage } from 'quasar'
-import { master } from 'src/helpers/master'
+import { master } from '../../../helpers/master'
 import axios from 'axios'
 import _ from 'lodash'
 export default {

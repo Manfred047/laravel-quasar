@@ -1,5 +1,5 @@
 import { Cookies } from 'quasar'
-import { master } from 'src/helpers/master'
+import { master } from '../../../helpers/master'
 import axios from 'axios'
 
 export default {

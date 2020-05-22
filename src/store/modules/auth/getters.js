@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { master } from 'src/helpers/master'
+import { master } from '../../../helpers/master'
 import { LocalStorage } from 'quasar'
 export default {
   isAuth (state) {

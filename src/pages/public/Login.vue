@@ -72,8 +72,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { AuthService } from 'src/services/AuthService'
-import { master } from 'src/helpers/master'
+import { AuthService } from '../../services/AuthService'
+import { master } from '../../helpers/master'
 import _ from 'lodash'
 import { ValidationObserver } from 'vee-validate'
 import { ValidationProvider } from 'vee-validate/dist/vee-validate.full'
