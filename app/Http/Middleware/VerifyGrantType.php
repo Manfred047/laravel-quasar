@@ -17,8 +17,8 @@ class VerifyGrantType
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @param $grants
      * @return mixed
      * @throws \Throwable
