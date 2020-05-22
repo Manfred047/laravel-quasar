@@ -5,7 +5,7 @@
         <q-card class="">
           <q-card-section>
             <validation-observer ref="observer" v-slot="{ valid }">
-              <q-form>
+              <q-form v-on:submit.prevent>
                 <div class="">
                   <p class="text-h6 text-center q-pb-sm">
                     {{ $t('login.title') }}
