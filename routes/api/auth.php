@@ -7,6 +7,9 @@
  * @github https://github.com/Manfred047
  */
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 /**
  * Auth routes
  * @todo Auth Routes
