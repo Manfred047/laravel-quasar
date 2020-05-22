@@ -61,7 +61,7 @@ export default {
           localize(veeLang(lang), language)
         })
       let localL = localLang(lang)
-      await import(`../../i18n/${localL}/${localL}`)
+      await import(`../../../i18n/${localL}/${localL}`)
         .then(language => {
           i18n.locale = localL
           i18n.setLocaleMessage(localL, language.default)
