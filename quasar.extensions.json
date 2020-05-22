@@ -5,26 +5,5 @@
     "common_root_object": "none",
     "create_env_files": true,
     "add_env_to_gitignore": true
-  },
-  "@quasar/icon-genie": {
-    "minify_dev": "pngquant",
-    "minify_build": "zopfli",
-    "cordova": {
-      "background_color": "#000074",
-      "splashscreen_type": "pure"
-    },
-    "build_always": false,
-    "__internal": {
-      "dev": {
-        "spa": {
-          "iconHash": "d57dfe50afd121dbc6007c693756fe1e"
-        }
-      },
-      "build": {
-        "spa": {
-          "iconHash": "d57dfe50afd121dbc6007c693756fe1e"
-        }
-      }
-    }
   }
 }
