@@ -88,7 +88,7 @@ const master = {
      * Formatea un numero determinado
      * @author Locutus (http://locutus.io)
      *
-     * @param {double}  number - Numero sin formato
+     * @param {float}  number - Numero sin formato
      * @param {string} [decimal=.] - Separador de decimales
      * @param {string} [thousand=,] - Separador de miles
      * @param {int} [fix=2] - Cantidad de decimales
@@ -122,7 +122,7 @@ const master = {
   /**
      * Formatea un numero determinado basado en el arreglo de datos
      *
-     * @param {double} number
+     * @param {float} number
      * @param {object} data
      * @returns {*|string}
      * @constructor
@@ -136,7 +136,7 @@ const master = {
   /**
      * Retorna un numero con simbolo de moneda
      *
-     * @param {double|string} number - valor con o sin formato
+     * @param {float|string} number - valor con o sin formato
      * @param {object} data - arreglo de moneda
      * @param {boolean} hasFormat - Si el numero ya trae formato
      * @returns {string}
@@ -159,7 +159,7 @@ const master = {
   /**
      * Retorna un numero con sombolo ISO
      *
-     * @param {double|string} number - valor con o sin formato
+     * @param {float|string} number - valor con o sin formato
      * @param {object} data - arreglo de moneda
      * @param {boolean} hasFormat - Si el numero ya trae formato
      * @returns {string}
