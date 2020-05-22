@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { AuthService } from '../../services/AuthService'
+import { AuthService } from 'src/services/AuthService'
 
 export default {
   setAuthStatus ({ commit }, auth) {
@@ -11,15 +11,19 @@ export default {
   storeToken ({ commit }, response) {
     commit('STORE_TOKEN', response)
   },
-  getUserData ({ commit }) {
+  async getUserData ({ commit }) {
     return AuthService.getAuthUser()
       .then(response => {
         commit('SET_AUTH_STATUS', true)
         commit('SET_USER_DATA', _.get(response, ['data', 'data'], {}))
-      }).catch().then()
+        return response
+      })
+      .catch(errors => {
+        throw errors
+      })
   },
-  logout ({ commit }, router) {
-    AuthService.logout()
+  async logout ({ commit }, router) {
+    await AuthService.logout()
     commit('FORCE_LOGOUT', router)
   },
   basicLogout ({ commit }, router) {

@@ -28,22 +28,22 @@ const master = {
    * @returns {*}
    */
   hasErrors (errors) {
-    let status = _.get(errors, ['response', 'status'])
+    const status = _.get(errors, ['response', 'status'])
     if (status === 422) {
       return _.get(errors, ['response', 'data', 'errors'], false)
     } else if (status === 401) {
-      let message = _.get(errors, ['response', 'data', 'error'])
+      const message = _.get(errors, ['response', 'data', 'error'])
       if (message === 'invalid_credentials') {
         return {
-          'type': 'auth',
-          'errors': _.get(errors, ['response', 'data', 'errors'], false)
+          type: 'auth',
+          errors: _.get(errors, ['response', 'data', 'errors'], false)
         }
       }
     }
     return false
   },
   hasRule (element, rule) {
-    let ruler = _.get(element, ['failedRules', rule])
+    const ruler = _.get(element, ['failedRules', rule])
     return !_.isEmpty(ruler)
   },
   /**
@@ -53,14 +53,14 @@ const master = {
      * @param {object} errors - lista de errores (parseada por hasErrors) del servidor
      */
   setErrors (observer, errors) {
-    let isAuth = _.get(errors, ['type']) === 'auth'
+    const isAuth = _.get(errors, ['type']) === 'auth'
     if (isAuth) {
       observer.$data.isAuth = true
       errors = _.get(errors, ['errors'], [])
     }
-    let aux = {}
+    const aux = {}
     for (const key of Object.keys(errors)) {
-      if (errors.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(errors, key)) {
         aux[key] = errors[key]
       }
     }
@@ -68,7 +68,7 @@ const master = {
   },
   onlyNumbers (evt) {
     evt = evt || window.event
-    let charCode = (evt.which) ? evt.which : evt.keyCode
+    const charCode = (evt.which) ? evt.which : evt.keyCode
     switch (true) {
       case (charCode >= 48 && charCode <= 105):
       case (charCode === 8):
@@ -96,13 +96,13 @@ const master = {
      */
   numberFormat (number, decimal, thousand, fix) {
     let TheNumber = (number + '').replace(/[^0-9+\-Ee.]/g, '')
-    let n = ((!isFinite(+TheNumber)) ? 0 : +TheNumber)
-    let prec = ((!isFinite(+fix)) ? 2 : Math.abs(fix))
-    let sep = ((typeof thousand === 'undefined') ? ',' : thousand)
-    let dec = ((typeof decimal === 'undefined') ? '.' : decimal)
+    const n = ((!isFinite(+TheNumber)) ? 0 : +TheNumber)
+    const prec = ((!isFinite(+fix)) ? 2 : Math.abs(fix))
+    const sep = ((typeof thousand === 'undefined') ? ',' : thousand)
+    const dec = ((typeof decimal === 'undefined') ? '.' : decimal)
     let s = ''
-    let toFixedFix = (n, prec) => {
-      let k = Math.pow(10, prec)
+    const toFixedFix = (n, prec) => {
+      const k = Math.pow(10, prec)
       return '' + (Math.round(n * k) / k)
         .toFixed(prec)
     }
@@ -115,7 +115,7 @@ const master = {
       s[1] = s[1] || ''
       s[1] += new Array(prec - s[1].length + 1).join('0')
     }
-    let regex = RegExp('\\' + dec + '00', 'g')
+    const regex = RegExp('\\' + dec + '00', 'g')
     TheNumber = s.join(dec)
     return TheNumber.replace(regex, '')
   },
@@ -128,9 +128,9 @@ const master = {
      * @constructor
      */
   ObjectNumberFormat (number, data) {
-    let decimal = _.get(data, ['decimal'], '.')
-    let thousand = _.get(data, ['thousand'], ',')
-    let fix = _.get(data, ['fix'], 2)
+    const decimal = _.get(data, ['decimal'], '.')
+    const thousand = _.get(data, ['thousand'], ',')
+    const fix = _.get(data, ['fix'], 2)
     return this.numberFormat(number, decimal, thousand, fix)
   },
   /**
@@ -145,8 +145,8 @@ const master = {
     if (!hasFormat) {
       number = this.ObjectNumberFormat(number, data)
     }
-    let position = _.get(data, ['position'], 'left')
-    let symbol = _.get(data, ['symbol'], '$')
+    const position = _.get(data, ['position'], 'left')
+    const symbol = _.get(data, ['symbol'], '$')
     switch (position) {
       case 'left':
         return `${symbol} ${number}`
@@ -168,7 +168,7 @@ const master = {
     if (!hasFormat) {
       number = this.ObjectNumberFormat(number, data)
     }
-    let iso = _.get(data, ['code'], 'MXN')
+    const iso = _.get(data, ['code'], 'MXN')
     return `${iso} ${number}`
   },
   /**
@@ -210,10 +210,10 @@ const master = {
      * @param {string} language - Idioma que tomará (leer la doc de google)
      */
   setRecaptchaLang (refs, language) {
-    let element = refs.getElementsByTagName('iframe')
+    const element = refs.getElementsByTagName('iframe')
     if (element[0]) {
       let src = element[0].getAttribute('src')
-      let lang = src.match(/hl=(.*?)&/).pop()
+      const lang = src.match(/hl=(.*?)&/).pop()
       if (lang !== language) {
         src = src.replace(/hl=(.*?)&/, `hl=${language}&`)
         element[0].setAttribute('src', src)
@@ -233,13 +233,13 @@ const master = {
     return o
   },
   hex2bin (bin) {
-    let ret = []
+    const ret = []
     let i = 0
     let l
     bin += ''
     for (l = bin.length; i < l; i += 2) {
-      let c = parseInt(bin.substr(i, 1), 16)
-      let k = parseInt(bin.substr(i + 1, 1), 16)
+      const c = parseInt(bin.substr(i, 1), 16)
+      const k = parseInt(bin.substr(i + 1, 1), 16)
       if (isNaN(c) || isNaN(k)) {
         return false
       }

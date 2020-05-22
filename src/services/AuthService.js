@@ -1,17 +1,17 @@
-import { master } from '../helpers/master'
+import { master } from 'src/helpers/master'
 import axios from 'axios'
 
 const AuthService = {
-  register (form) {
+  async register (form) {
     return axios.post(master.api('register'), form)
   },
-  login (form) {
+  async login (form) {
     return axios.post(master.api('oauth/token'), form)
   },
-  logout () {
+  async logout () {
     return axios.post(master.api('oauth/logout'))
   },
-  getAuthUser () {
+  async getAuthUser () {
     return axios.get(master.api('oauth/user'))
   }
 }

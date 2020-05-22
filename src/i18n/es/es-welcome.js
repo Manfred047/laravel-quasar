@@ -1,3 +1,3 @@
 export const esWelcome = {
-  'greetings': 'Saludos'
+  greetings: 'Saludos'
 }

@@ -1,3 +1,3 @@
 export const esGeneralForm = {
-  'back_btn': 'Regresar'
+  back_btn: 'Regresar'
 }

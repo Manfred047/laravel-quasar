@@ -81,14 +81,13 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <FooterLayout></FooterLayout>
+    <footer-layout></footer-layout>
   </q-layout>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { Loading } from 'quasar'
-import FooterLayout from '../global/FooterLayout'
 export default {
   preFetch ({ store, currentRoute, previousRoute, redirect, ssrContext }) {
     Loading.show()
@@ -107,7 +106,7 @@ export default {
   },
   name: 'AdminLayout',
   components: {
-    FooterLayout
+    'footer-layout': () => import('../global/FooterLayout')
   },
   computed: {
     ...mapGetters('auth', ['username', 'email'])

@@ -121,8 +121,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { AuthService } from '../../services/AuthService'
-import { master } from '../../helpers/master'
+import { AuthService } from 'src/services/AuthService'
+import { master } from 'src/helpers/master'
 import { ValidationObserver } from 'vee-validate'
 import { ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 import _ from 'lodash'
@@ -158,7 +158,7 @@ export default {
           this.$router.replace({ name: 'public.login' })
         })
         .catch(errors => {
-          let errArray = master.hasErrors(errors)
+          const errArray = master.hasErrors(errors)
           if (errArray) {
             master.setErrors(this.$refs.observer, errArray)
           }

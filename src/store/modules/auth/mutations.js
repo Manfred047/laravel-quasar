@@ -1,5 +1,5 @@
 import { LocalStorage } from 'quasar'
-import { master } from '../../helpers/master'
+import { master } from 'src/helpers/master'
 import axios from 'axios'
 import _ from 'lodash'
 export default {
@@ -15,7 +15,7 @@ export default {
     LocalStorage.set(master.getStorageUserDataName(), data)
   },
   FORCE_LOGOUT (state, router) {
-    delete axios.defaults.headers.common['Authorization']
+    delete axios.defaults.headers.common.Authorization
     LocalStorage.remove(master.getAuthTokenName())
     LocalStorage.remove(master.getStorageUserDataName())
     state.is_auth = false
@@ -23,8 +23,8 @@ export default {
     router.replace({ name: 'public.login' })
   },
   STORE_TOKEN (state, data) {
-    let token = _.get(data, ['data', 'access_token'])
+    const token = _.get(data, ['data', 'access_token'])
     LocalStorage.set(master.getAuthTokenName(), token)
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`
   }
 }

@@ -72,8 +72,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { AuthService } from '../../services/AuthService'
-import { master } from '../../helpers/master'
+import { AuthService } from 'src/services/AuthService'
+import { master } from 'src/helpers/master'
 import _ from 'lodash'
 import { ValidationObserver } from 'vee-validate'
 import { ValidationProvider } from 'vee-validate/dist/vee-validate.full'
@@ -120,7 +120,7 @@ export default {
           this.storeToken(response)
           this.setAuthStatus(true)
           this.setUserData(_.get(response, ['data', 'user_data'], {}))
-          let redirect = _.get(this.$route, ['query', 'redirect'])
+          const redirect = _.get(this.$route, ['query', 'redirect'])
           if (redirect) {
             this.$router.replace(redirect)
           } else {
@@ -128,7 +128,7 @@ export default {
           }
         })
         .catch(errors => {
-          let errArray = master.hasErrors(errors)
+          const errArray = master.hasErrors(errors)
           if (errArray) {
             master.setErrors(this.$refs.observer, errArray)
           }
@@ -168,7 +168,7 @@ export default {
 }
 </script>
 
-<style type="text/stylus" scoped>
+<style scoped>
 .image-background {
   background-image: url('../../assets/custom/login-background.jpg');
 }

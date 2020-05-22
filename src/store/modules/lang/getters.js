@@ -1,5 +1,6 @@
 import { Cookies } from 'quasar'
-import { master } from '../../helpers/master'
+import { master } from 'src/helpers/master'
+
 export default {
   getLanguage (state) {
     if (Cookies.has(master.getLangCookieName())) {
