@@ -6,12 +6,12 @@ import { enPageTitles } from './en-page-titles'
 import { enGeneralForm } from './en-general-form'
 
 const en = {
-  'welcome': enWelcome,
-  'register': enRegister,
-  'login': enLogin,
-  'error': enErrors,
-  'page_titles': enPageTitles,
-  'general_form': enGeneralForm
+  welcome: enWelcome,
+  register: enRegister,
+  login: enLogin,
+  error: enErrors,
+  page_titles: enPageTitles,
+  general_form: enGeneralForm
 }
 
 export { en }

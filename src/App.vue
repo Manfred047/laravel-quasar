@@ -7,7 +7,7 @@
 <script>
 export default {
   preFetch ({ store, currentRoute, previousRoute, redirect, ssrContext }) {
-    let locale = store.getters['lang/getLanguage']
+    const locale = store.getters['lang/getLanguage']
     store.dispatch('lang/setLanguage', [store.$router.app.$i18n, locale])
   },
   name: 'App'

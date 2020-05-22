@@ -5,7 +5,7 @@
         <q-card class="">
           <q-card-section>
             <validation-observer ref="observer" v-slot="{ valid }">
-              <q-form>
+              <q-form v-on:submit.prevent>
                 <div class="">
                   <p class="text-h6 text-center q-pb-sm">
                     {{ $t('login.title') }}
@@ -120,7 +120,7 @@ export default {
           this.storeToken(response)
           this.setAuthStatus(true)
           this.setUserData(_.get(response, ['data', 'user_data'], {}))
-          let redirect = _.get(this.$route, ['query', 'redirect'])
+          const redirect = _.get(this.$route, ['query', 'redirect'])
           if (redirect) {
             this.$router.replace(redirect)
           } else {
@@ -128,7 +128,7 @@ export default {
           }
         })
         .catch(errors => {
-          let errArray = master.hasErrors(errors)
+          const errArray = master.hasErrors(errors)
           if (errArray) {
             master.setErrors(this.$refs.observer, errArray)
           }
@@ -168,7 +168,7 @@ export default {
 }
 </script>
 
-<style type="text/stylus" scoped>
+<style scoped>
 .image-background {
   background-image: url('../../assets/custom/login-background.jpg');
 }

@@ -5,7 +5,7 @@
         <q-card class="">
           <q-card-section>
             <validation-observer ref="observer" v-slot="{ valid }">
-              <q-form>
+              <q-form v-on:submit.prevent>
                 <div class="">
                   <p class="text-h6 text-center q-pb-sm">
                     {{ $t('register.title') }}
@@ -158,7 +158,7 @@ export default {
           this.$router.replace({ name: 'public.login' })
         })
         .catch(errors => {
-          let errArray = master.hasErrors(errors)
+          const errArray = master.hasErrors(errors)
           if (errArray) {
             master.setErrors(this.$refs.observer, errArray)
           }

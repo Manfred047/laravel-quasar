@@ -1,3 +1,3 @@
 export const enWelcome = {
-  'greetings': 'Hello!!!'
+  greetings: 'Hello!!!'
 }

@@ -8,11 +8,11 @@ export default async ({ Vue, app, ssrContext, store, router }) => {
     ? Cookies.parseSSR(ssrContext)
     : Cookies
   // Global axios defaults
-  let token = LocalStorage.getItem(master.getAuthTokenName())
+  const token = LocalStorage.getItem(master.getAuthTokenName())
   axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
   axios.defaults.headers.common['Accept-Language'] = cookies.get(master.getLangCookieName())
   if (!_.isEmpty(token)) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`
   }
   // Add a request interceptor
   axios.interceptors.request.use((config) => {
@@ -69,7 +69,8 @@ export default async ({ Vue, app, ssrContext, store, router }) => {
           break
 
         case 401:
-          let message = _.get(error, ['response', 'data', 'message'], '')
+          // eslint-disable-next-line no-case-declarations
+          const message = _.get(error, ['response', 'data', 'message'], '')
           if (message === 'Unauthenticated') {
             Notify.create({
               message: app.i18n.t('error.eSessionExpired'),

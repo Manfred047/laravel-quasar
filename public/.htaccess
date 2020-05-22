@@ -15,14 +15,8 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Handle Front Controller...
+    # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-    # Autorizar peticiones de cualquier origen
-    Header set Access-Control-Allow-Origin "*"
-    Header set Access-Control-Allow-Credentials true
-    header set Access-Control-Allow-Methods "GET, PUT, PATCH, POST, DELETE, OPTIONS, HEAD"
-    Header set Access-Control-Allow-Headers "Content-Type, Authorization, Content-Length, X-Requested-With, Origin"
 </IfModule>

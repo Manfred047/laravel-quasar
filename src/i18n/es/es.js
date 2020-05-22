@@ -6,12 +6,12 @@ import { esPageTitles } from './es-page-titles'
 import { esGeneralForm } from './es-general-form'
 
 const es = {
-  'welcome': esWelcome,
-  'register': esRegister,
-  'login': esLogin,
-  'error': esErrors,
-  'page_titles': esPageTitles,
-  'general_form': esGeneralForm
+  welcome: esWelcome,
+  register: esRegister,
+  login: esLogin,
+  error: esErrors,
+  page_titles: esPageTitles,
+  general_form: esGeneralForm
 }
 
 export { es }

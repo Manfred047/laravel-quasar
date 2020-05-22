@@ -28,7 +28,7 @@ export default {
   methods: {
     ...mapActions('lang', ['setLanguage']),
     findLang () {
-      let language = _.find(this.languages, x => x.value === this.getLanguage)
+      const language = _.find(this.languages, x => x.value === this.getLanguage)
       this.language = _.get(language, ['value'], 'en')
     }
   },
