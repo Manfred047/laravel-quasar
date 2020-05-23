@@ -7,6 +7,7 @@ use App\Library\Master;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Laravel\Passport\Exceptions\OAuthServerException;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -16,10 +17,17 @@ class LoginController extends AccessTokenController
     {
         validator($request->all(), User::loginRules())
             ->validate();
-        $tokenResponse = parent::issueToken($server);
-        $content = $tokenResponse->getContent();
-        $data = json_decode($content, true);
-        if(isset($data["error"])) {
+        try {
+            $tokenResponse = parent::issueToken($server);
+            $content = $tokenResponse->getContent();
+            $data = json_decode($content, true);
+            if (isset($data['access_token'])) {
+                $user = new User();
+                $data['user_data'] = UserResource::make($user->findForPassport($request->input('username')));
+                return $tokenResponse->setContent($data);
+            }
+            return $tokenResponse;
+        } catch (OAuthServerException $OAuthServerException) {
             return response()->json([
                 'error' => 'invalid_credentials',
                 'message' => 'The user credentials were incorrect.',
@@ -28,13 +36,12 @@ class LoginController extends AccessTokenController
                     'password' => ['Incorrect username or password']
                 ]
             ], 401);
+        } catch (\Exception $exception) {
+            if (Master::hasDebug()) {
+                return Master::exceptionResponse($exception, 'login');
+            }
         }
-        if (isset($data['access_token'])) {
-            $user = new User();
-            $data['user_data'] = UserResource::make($user->findForPassport($request->input('username')));
-            return $tokenResponse->setContent($data);
-        }
-        return $tokenResponse;
+        return Master::errorResponse('login', 'login', 500);
     }
 
     public function logout(Request $request)
