@@ -70,7 +70,7 @@
   "dependencies": {
     "@quasar/extras": "^1.8.1",
     "axios": "^0.19.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.26.0",
     "moment-timezone": "^0.5.31",
     "quasar": "^1.11.3",
