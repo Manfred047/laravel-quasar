@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[8],{5490:function(n,e,o){"use strict";o.r(e),o.d(e,"esWelcome",(function(){return s}));const s={greetings:"Saludos"}}}]);
