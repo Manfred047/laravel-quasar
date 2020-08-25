@@ -73,9 +73,23 @@ module.exports = function (ctx) {
         if (ctx.prod) {
           cfg.output.publicPath = '/quasar/'
         }
+        const CopyWebpackPlugin = require('copy-webpack-plugin')
+        cfg.plugins.push(
+          new CopyWebpackPlugin({
+            patterns: [
+              { from: 'src/statics', to: 'statics' }
+            ]
+          })
+        )
       },
       distDir: 'public/quasar',
-      ignorePublicFolder: true
+      ignorePublicFolder: true,
+      files: [
+        {
+          from: 'src/statics',
+          to: 'quasar/statics'
+        }
+      ]
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
