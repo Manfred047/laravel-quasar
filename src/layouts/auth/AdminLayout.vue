@@ -12,7 +12,7 @@
         </q-btn>
 
         <q-toolbar-title>
-          Laravel 6.0 with Quasar v{{$q.version}} (SPA) by Manfred047
+          Laravel 7.0 with Quasar v{{$q.version}} (SPA) by Manfred047
         </q-toolbar-title>
 
       </q-toolbar>
